@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--5s6l+yhupph%yb98s&2g6^%ve070#$u#the74o$wz5j)90i#)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*','.vercel.app']
+ALLOWED_HOSTS = ['*','.vercel.app','now.sh']
 
 
 # Application definition
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'legaltech.wsgi.application'
+WSGI_APPLICATION = 'legaltech.wsgi.app'
 
 
 # Database
@@ -125,3 +125,5 @@ STATICFILES_DIRS=[
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')

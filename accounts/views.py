@@ -5,3 +5,6 @@ def index(request):
 
 def login(request):
     return render(request,'login.html')
+
+def test_branch(request):
+    return render(request,'test_branch.html')

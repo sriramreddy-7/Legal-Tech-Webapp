@@ -49,11 +49,11 @@ Once the application is up and running, users can:
 - Engage in secure communication for consultations or services.
 
 ## Contributors
-- K. Sriram Reddy
-- B. Sathwik Reddy
-- K. Sai Sidhartha
-- J. Keerthan
-- V. Sai Babu
+- K. Sriram Reddy ([sriramreddy-7](https://github.com/sriramreddy-7))
+- B. Sathwik Reddy ([sathwikreddybolledla](https://github.com/sathwikreddybolledla))
+- K. Sai Sidhartha ([kothapallysidhartha](https://github.com/kothapallysidhartha))
+- J. Keerthan ([Keerthangithub](https://github.com/Keerthangithub))
+- V. Sai Babu ([saibabu1409](https://github.com/saibabu1409))
 
-## License
-This project is licensed under the [License Name] - see the [LICENSE.md](LICENSE.md) file for details.
+
+

@@ -8,3 +8,6 @@ def login(request):
 
 def ksr(request):
     return render(request,"sriram.html")
+
+def demo(request):
+    return render(request,'demo.html')

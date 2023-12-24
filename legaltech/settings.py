@@ -123,7 +123,7 @@ STATIC_URL = 'static/'
 
 # At the end of file. add these lines
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR,'assets') # here static is like assets
 MEDIA_URLS ='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

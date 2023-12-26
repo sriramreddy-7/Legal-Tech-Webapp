@@ -6,6 +6,9 @@ def index(request):
 def admin_base(request):
     return render(request,'admin_base.html')
 
+def client_login(request):
+    return render(request,'client_login.html')
+
 # def login(request):
 #     return render(request,'login.html')
 

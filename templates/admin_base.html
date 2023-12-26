@@ -45,13 +45,13 @@
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
-
+<!-- 
     <div class="search-bar">
       <form class="search-form d-flex align-items-center" method="POST" action="#">
         <input type="text" name="query" placeholder="Search" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
-    </div><!-- End Search Bar -->
+    </div> -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -517,7 +517,7 @@
       <div class="row">
 
         <!-- Left side columns -->
-        <div class="col-lg-8">
+        <div class="col-lg-12">
           <div class="row">
 
             <!-- Sales Card -->
@@ -538,11 +538,11 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Sales <span>| Today</span></h5>
+                  <h5 class="card-title">Cases <span>| Today</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
+                      <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
                       <h6>145</h6>
@@ -609,7 +609,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Customers <span>| This Year</span></h5>
+                  <h5 class="card-title">Clients <span>| This Year</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -645,7 +645,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
+                  <h5 class="card-title">Analytics <span>|Today</span></h5>
 
                   <!-- Line Chart -->
                   <div id="reportsChart"></div>
@@ -654,13 +654,13 @@
                     document.addEventListener("DOMContentLoaded", () => {
                       new ApexCharts(document.querySelector("#reportsChart"), {
                         series: [{
-                          name: 'Sales',
+                          name: 'Cases',
                           data: [31, 40, 28, 51, 42, 82, 56],
                         }, {
                           name: 'Revenue',
                           data: [11, 32, 45, 32, 34, 52, 41]
                         }, {
-                          name: 'Customers',
+                          name: 'Clients',
                           data: [15, 11, 32, 18, 9, 24, 11]
                         }],
                         chart: {
@@ -733,9 +733,9 @@
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Customer</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Case Type</th>
+                        <th scope="col">Amount</th>
                         <th scope="col">Status</th>
                       </tr>
                     </thead>
@@ -801,14 +801,14 @@
                 </div>
 
                 <div class="card-body pb-0">
-                  <h5 class="card-title">Top Selling <span>| Today</span></h5>
+                  <h5 class="card-title">Upcoming Cases <span>| Today</span></h5>
 
                   <table class="table table-borderless">
                     <thead>
                       <tr>
                         <th scope="col">Preview</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
+                        <th scope="col">Case Type</th>
+                        <th scope="col">Amount</th>
                         <th scope="col">Sold</th>
                         <th scope="col">Revenue</th>
                       </tr>
@@ -878,7 +878,7 @@
               </ul>
             </div>
 
-            <div class="card-body">
+            <!-- <div class="card-body">
               <h5 class="card-title">Recent Activity <span>| Today</span></h5>
 
               <div class="activity">
@@ -889,7 +889,7 @@
                   <div class="activity-content">
                     Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
                   </div>
-                </div><!-- End activity item-->
+                </div>
 
                 <div class="activity-item d-flex">
                   <div class="activite-label">56 min</div>
@@ -897,7 +897,7 @@
                   <div class="activity-content">
                     Voluptatem blanditiis blanditiis eveniet
                   </div>
-                </div><!-- End activity item-->
+                </div>
 
                 <div class="activity-item d-flex">
                   <div class="activite-label">2 hrs</div>
@@ -905,7 +905,7 @@
                   <div class="activity-content">
                     Voluptates corrupti molestias voluptatem
                   </div>
-                </div><!-- End activity item-->
+                </div>
 
                 <div class="activity-item d-flex">
                   <div class="activite-label">1 day</div>
@@ -913,7 +913,7 @@
                   <div class="activity-content">
                     Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
                   </div>
-                </div><!-- End activity item-->
+                </div>
 
                 <div class="activity-item d-flex">
                   <div class="activite-label">2 days</div>
@@ -921,7 +921,7 @@
                   <div class="activity-content">
                     Est sit eum reiciendis exercitationem
                   </div>
-                </div><!-- End activity item-->
+                </div>
 
                 <div class="activity-item d-flex">
                   <div class="activite-label">4 weeks</div>
@@ -929,15 +929,14 @@
                   <div class="activity-content">
                     Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
                   </div>
-                </div><!-- End activity item-->
+                </div>
 
               </div>
 
-            </div>
-          </div><!-- End Recent Activity -->
+            </div> -->
+          </div>
 
-          <!-- Budget Report -->
-          <div class="card">
+          <!-- <div class="card">
             <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -1008,9 +1007,9 @@
               </script>
 
             </div>
-          </div><!-- End Budget Report -->
+          </div> -->
 
-          <!-- Website Traffic -->
+<!--          
           <div class="card">
             <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -1086,10 +1085,10 @@
               </script>
 
             </div>
-          </div><!-- End Website Traffic -->
+          </div> -->
 
           <!-- News & Updates Traffic -->
-          <div class="card">
+          <!-- <div class="card">
             <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -1137,17 +1136,17 @@
                   <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
                 </div>
 
-              </div><!-- End sidebar recent posts-->
+              </div>
 
             </div>
-          </div><!-- End News & Updates -->
+          </div>  -->
 
-        </div><!-- End Right side columns -->
+        </div> 
 
       </div>
     </section>
 
-  </main><!-- End #main -->
+  </main>
 
  
 

@@ -4,7 +4,10 @@ def index(request):
     return render(request,'index.html')
 
 def admin_base(request):
-    return render(request,'admin_base.html')
+    try:
+        return render(request,'admin_base.html')
+    except:
+        return render(request,'error-404.html')
 
 def client_login(request):
     return render(request,'client_login.html')

@@ -23,12 +23,16 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",views.home,name="home"),
-    path("home",views.home2,name="home"),
+    path("home",views.home2,name="home"), 
+    path('activate/<uidb64>/<token>', views.activate, name='activate'),
     path("admin_base",views.admin_base,name="admin_base"),
-    path("client_login",views.client_login,name="client_login"),
+    path("user_login",views.user_login,name="user_login"),
     path("service",views.service,name="service"),
     path("lsp_base",views.lsp_base,name="lsp_base"),
     path("lsp_dashboard",views.lsp_dashboard,name="lsp_dashboard"),
+    path("user_registration",views.user_registration,name="user_registration"),
+    path('user_login',views.user_login,name="user_login"),
+    
     # path("login",views.login,name="login"),
     
     

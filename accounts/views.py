@@ -1,7 +1,7 @@
 from django.shortcuts import render ,redirect
 # Create your views here.
-def index(request):
-    return render(request,'index.html')
+def home(request):
+    return render(request,'home.html')
 
 def admin_base(request):
     try:
@@ -12,6 +12,17 @@ def admin_base(request):
 def client_login(request):
     return render(request,'client_login.html')
 
+def service(request):
+    return render(request,'service.html')
+
+def home2(request):
+    return render(request,'home.html')
+
 # def login(request):
 #     return render(request,'login.html')
 
+def lsp_base(request):
+    return render(request,'lsp_base.html')
+
+def lsp_dashboard(request):
+    return render(request,'lsp_dashboard.html')

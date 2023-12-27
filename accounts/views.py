@@ -21,3 +21,8 @@ def home2(request):
 # def login(request):
 #     return render(request,'login.html')
 
+def lsp_base(request):
+    return render(request,'lsp_base.html')
+
+def lsp_dashboard(request):
+    return render(request,'lsp_dashboard.html')

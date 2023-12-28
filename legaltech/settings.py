@@ -149,7 +149,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage" 
-STATICFILES_STORAGE='django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
@@ -157,3 +157,6 @@ EMAIL_POST = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER ='crazycodersdev@gmail.com'
 EMAIL_HOST_PASSWORD ='uxllkibqnucpbraa'
+
+
+# STATICFILES_STORAGE='django.contrib.staticfiles.storage.ManifestStaticFilesStorage'

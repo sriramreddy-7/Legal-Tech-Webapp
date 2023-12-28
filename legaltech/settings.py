@@ -82,7 +82,11 @@ WSGI_APPLICATION = 'legaltech.wsgi.app'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+import dj_database_url
 
+DATABASES = {
+    'default': dj_database_url.parse('postgresql://postgres:2CdCdE2c4B-aDcA5d64eFGcda5AG1-fG@roundhouse.proxy.rlwy.net:30056/railway')
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -145,5 +149,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage" 
-STATICFILES_STORAGE='django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER ='crazycodersdev@gmail.com'
+EMAIL_HOST_PASSWORD ='uxllkibqnucpbraa'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_TIMEOUT = None
+
+# STATICFILES_STORAGE='django.contrib.staticfiles.storage.ManifestStaticFilesStorage'

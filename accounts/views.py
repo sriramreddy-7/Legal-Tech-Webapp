@@ -81,7 +81,7 @@ def user_registration(request):
         message2 = render_to_string('email_confirmation.html',{
             'name': myuser.first_name,
             # 'domain': current_site.domain,
-            'domain':'https://legal-tech-webapp-git-sriram-sriramreddy-7.vercel.app/',
+            'domain':'https://legal-tech-webapp-git-sriram-sriramreddy-7.vercel.app',
             'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
             'token': generate_token.make_token(myuser),
         })

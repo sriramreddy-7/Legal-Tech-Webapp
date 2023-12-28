@@ -11,17 +11,19 @@ from django.utils.encoding import force_bytes,force_str
 from django.contrib.auth import authenticate, login, logout
 from accounts.tokens import generate_token
 
-
-
 # Create your views here.
 def home(request):
     return render(request,'home.html')
 
-def admin_base(request):
-    try:
-        return render(request,'admin_base.html')
-    except:
-        return render(request,'error-404.html')
+# def admin_base(request):
+#     try:
+#         return render(request,'admin_base.html')
+#     except:
+#         return render(request,'error-404.html')
+
+# def lsp_base(request):
+#     return render(request,'lsp_base.html')
+
 
 def client_login(request):
     return render(request,'client_login.html')
@@ -32,14 +34,15 @@ def service(request):
 def home2(request):
     return render(request,'home.html')
 
-# def login(request):
-#     return render(request,'login.html')
-
-def lsp_base(request):
-    return render(request,'lsp_base.html')
-
 def lsp_dashboard(request):
     return render(request,'lsp_dashboard.html')
+
+def admin_dashboard(request):
+    return render(request,'admin_dashboard.html')
+
+
+
+
 
 def user_registration(request):
     if request.method == "POST":
@@ -122,16 +125,22 @@ def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        
         user = authenticate(username=username, password=password)
-        
         if user is not None:
             login(request, user)
             # fname = user.first_name
             # messages.success(request, "Logged In Sucessfully!!")
-            return redirect("lsp_dashboard")
+            if username == 'lawyer':
+                return redirect("lsp_dashboard")
+            elif username == 'admin':
+                return redirect('admin_dashboard')
+            else:
+                return render(request,'error-404.html')
+                
         else:
             messages.error(request, "Bad Credentials!!")
             return redirect('user_login')
 
     return render(request,'user_login.html')
+
+

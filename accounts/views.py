@@ -129,7 +129,7 @@ def user_login(request):
             login(request, user)
             # fname = user.first_name
             # messages.success(request, "Logged In Sucessfully!!")
-            return redirect("lsp_dashboard.html")
+            return redirect("lsp_dashboard")
         else:
             messages.error(request, "Bad Credentials!!")
             return redirect('user_login')

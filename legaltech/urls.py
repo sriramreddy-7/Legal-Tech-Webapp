@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+    
     path('admin/', admin.site.urls),
     path("",views.home,name="home"),
     path("home",views.home2,name="home"), 
@@ -32,13 +33,11 @@ urlpatterns = [
     path("lsp_dashboard",views.lsp_dashboard,name="lsp_dashboard"),
     path("user_registration",views.user_registration,name="user_registration"),
     path('user_login',views.user_login,name="user_login"),
-    
     # path("login",views.login,name="login"),
-    
-    
 ]
-
-
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+
+
+
 

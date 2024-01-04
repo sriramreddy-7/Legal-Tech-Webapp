@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -38,6 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     # 'whitenoise.runserver_nonstatic',
     'django.contrib.staticfiles',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.github',
     'accounts',
 ]
 
@@ -50,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Add the account middleware:
+    # "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'legaltech.urls'
@@ -65,13 +74,29 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+                'django.template.context_processors.request',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'legaltech.wsgi.app'
+AUTHENTICATION_BACKENDS = [
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
 
+    # `allauth` specific authentication methods, such as login by email
+    # 'allauth.account.auth_backends.AuthenticationBackend',
+   
+]
+
+
+#SITE_ID=1
+# 240318269996-2ujo6ujdtq45cukgergu7qn7vdfk8idi.apps.googleusercontent.com
+# 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
+
+WSGI_APPLICATION = 'legaltech.wsgi.app'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -82,10 +107,12 @@ WSGI_APPLICATION = 'legaltech.wsgi.app'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.parse('postgresql://postgres:2CdCdE2c4B-aDcA5d64eFGcda5AG1-fG@roundhouse.proxy.rlwy.net:30056/railway')
+    #'default': dj_database_url.parse('postgresql://postgres:2CdCdE2c4B-aDcA5d64eFGcda5AG1-fG@roundhouse.proxy.rlwy.net:30056/railway')
+    'default': dj_database_url.parse('postgres://crazycoders:MkaIZ4K82Qf4FsK8DmXcFeZ2CAIM2vaw@dpg-cm8p4p6d3nmc73b0dojg-a.oregon-postgres.render.com/pec_render_database')
 }
 
 # Password validation
@@ -106,7 +133,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -118,14 +144,10 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
-
 
 # At the end of file. add these lines
 
@@ -135,10 +157,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Also Make aure To set allowed_hosts to '*'
 
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR, 'static')
 ]
+
+
+SITE_ID = 1
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -160,4 +187,41 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_TIMEOUT = None
 
-# STATICFILES_STORAGE='django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+STATICFILES_STORAGE='django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
+
+
+# LOGIN_REDIRECT_URL = 'home'
+
+# ACCOUNT_LOGOUT_REDIRECT_URL = 'user_login'
+
+# ACCOUNT_EMAIL_REQUIRED = True
+
+# SOCIALACCOUNT_QUERY_EMAIL = True
+
+# ACCOUNT_SESSION_REMEMBER = True
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'facebook': {
+#         'METHOD': 'oauth2',
+#         'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+#         'SCOPE': ['email', 'public_profile'],
+#         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+#         'INIT_PARAMS': {'cookie': True},
+#         'FIELDS': [
+#             'id',
+#             'first_name',
+#             'last_name',
+#             'middle_name',
+#             'name',
+#             'name_format',
+#             'picture',
+#             'short_name'
+#         ],
+#         'EXCHANGE_TOKEN': True,
+#         # 'LOCALE_FUNC': 'path.to.callable',
+#         'VERIFIED_EMAIL': False,
+#         'VERSION': 'v7.0',
+#     }
+# }
+

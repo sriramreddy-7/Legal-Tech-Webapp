@@ -10,6 +10,8 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes,force_str
 from django.contrib.auth import authenticate, login, logout
 from accounts.tokens import generate_token
+# from accounts.models Profile
+
 
 # Create your views here.
 def home(request):
@@ -38,7 +40,7 @@ def lsp_dashboard(request):
     return render(request,'lsp_dashboard.html')
 
 def admin_dashboard(request):
-    return render(request,'admin_dashboard.html')
+    return render(request,'admin/admin_dashboard.html')
 
 
 
@@ -99,7 +101,7 @@ def user_registration(request):
         
         return redirect('user_login')
     
-    return render(request,'user_registration.html')
+    return render(request,'client/user_registration.html')
 
 
 
@@ -128,19 +130,30 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            # fname = user.first_name
-            # messages.success(request, "Logged In Sucessfully!!")
             if username == 'lawyer':
                 return redirect("lsp_dashboard")
             elif username == 'admin':
                 return redirect('admin_dashboard')
             else:
-                return render(request,'error-404.html')
+                return render(request,'server/error-404.html')
                 
         else:
             messages.error(request, "Bad Credentials!!")
-            return redirect('user_login')
+            return redirect('client/user_login')
 
-    return render(request,'user_login.html')
+    return render(request,'client/user_login.html')
 
 
+def users_list(request):
+    user_det=User.objects.all()
+    context={
+        'user_det' :user_det,
+    }
+    return render(request,'admin/users_list.html',context)
+
+
+
+def user_logout(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('home')

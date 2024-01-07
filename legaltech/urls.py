@@ -28,6 +28,7 @@ urlpatterns = [
     path('activate/<uidb64>/<token>', views.activate, name='activate'),
     # path("admin_base",views.admin_base,name="admin_base"),
     path("admin_dashboard",views.admin_dashboard,name="admin_dashboard"),
+    path("client_registration",views.client_registration,name="client_registration"),
     path('users_list',views.users_list,name="users_list"),
     path("lsp_dashboard",views.lsp_dashboard,name="lsp_dashboard"),
     path("user_login",views.user_login,name="user_login"),

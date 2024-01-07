@@ -27,17 +27,34 @@ urlpatterns = [
     path("home",views.home2,name="home"), 
     path('activate/<uidb64>/<token>', views.activate, name='activate'),
     # path("admin_base",views.admin_base,name="admin_base"),
-    path("admin_dashboard",views.admin_dashboard,name="admin_dashboard"),
+    
+    #registration's
     path("client_registration",views.client_registration,name="client_registration"),
+    path("user_registration",views.user_registration,name="user_registration"),
+    path('lsp_registration',views.lsp_registration,name="lsp_registration"),
+    
+    
+    # login's
+    path('user_login',views.user_login,name="user_login"),
+    path("user_login",views.user_login,name="user_login"),
+    
+    path("logout",views.user_logout,name="logout"),
+    
+    
+    #dashboard's
+    path("admin_dashboard",views.admin_dashboard,name="admin_dashboard"),
+    
     path('users_list',views.users_list,name="users_list"),
     path("lsp_dashboard",views.lsp_dashboard,name="lsp_dashboard"),
-    path("user_login",views.user_login,name="user_login"),
+    
     path("service",views.service,name="service"),
     # path("lsp_base",views.lsp_base,name="lsp_base"),
     path("lsp_dashboard",views.lsp_dashboard,name="lsp_dashboard"),
-    path("user_registration",views.user_registration,name="user_registration"),
-    path('user_login',views.user_login,name="user_login"),
-    path("logout",views.user_logout,name="logout"),
+   
+    
+    
+    
+    
     # path("login",views.login,name="login"),
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

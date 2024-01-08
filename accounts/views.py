@@ -38,7 +38,7 @@ def home2(request):
     return render(request,'home.html')
 
 def lsp_dashboard(request):
-    return render(request,'lsp_dashboard.html')
+    return render(request,'lsp/lsp_dashboard.html')
 
 def admin_dashboard(request):
     return render(request,'admin/admin_dashboard.html')
@@ -131,12 +131,12 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            if username == 'lawyer':
-                return redirect("lsp_dashboard")
-            elif username == 'admin':
-                return redirect('admin_dashboard')
-            else:
-                return render(request,'server/error-404.html')
+            # if username == 'lawyer':
+            return redirect("lsp_dashboard")
+            # elif username == 'admin':
+            #     return redirect('admin_dashboard')
+            # else:
+            #     return render(request,'server/error-404.html')
                 
         else:
             messages.error(request, "Bad Credentials!!")
@@ -229,10 +229,9 @@ def client_registration(request):
        [myuser.email],
        )
        email.fail_silently = True
-       email.send()
-       
+       email.send()   
        return redirect('user_login')
-      
+    
     else:
         print("Iam in inside the Else Block")
         return render(request,'client/client_registration.html')

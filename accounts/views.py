@@ -11,6 +11,7 @@ from django.utils.encoding import force_bytes,force_str
 from django.contrib.auth import authenticate, login, logout
 from accounts.tokens import generate_token
 from accounts.models import Profile,LSP
+from django.shortcuts import get_object_or_404
 # from accounts.models Profile
 
 
@@ -146,12 +147,29 @@ def user_login(request):
 
 
 def users_list(request):
-    user_det=User.objects.all()
-    context={
-        'user_det' :user_det,
-    }
-    return render(request,'admin/users_list.html',context)
+    # user_det=User.objects.all()
+    # profile_user=Profile.objects.all()
+    # lsp_users= LSP.objects.all()
+    lsp_users = LSP.objects.filter(lsp_type='Lawyer')
+    profiles = Profile.objects.filter(user__in=lsp_users.values('user'))
+    user_det = User.objects.filter(pk__in=lsp_users.values('user'))
 
+    profiles_with_lsps = []
+
+    for i in range(len(lsp_users)):
+        profiles_with_lsps.append({
+            'user_det': user_det[i],
+            'lsp_user': lsp_users[i],
+            'profile': profiles[i],
+        })
+
+    context = {
+        'profiles_with_lsps': profiles_with_lsps,
+    }
+    
+    return render(request,'admin/users_list.html',context)
+    
+    # return render(request,'admin/users_list.html')
 
 
 def user_logout(request):
@@ -336,3 +354,22 @@ def lsp_registration(request):
        return redirect('user_login')
    
     return render(request,'lsp/lsp_registration.html')
+
+
+
+
+
+def admin_lsp_profile(request,username):
+    user = get_object_or_404(User, username=username)
+
+    # Retrieve Profile and LSP related to the user
+    user_profile = get_object_or_404(Profile, user=user)
+    lsp_users = LSP.objects.filter(user=user)
+
+    context = {
+        'user':user,
+        'user_profile': user_profile,
+        'lsp_users': lsp_users,
+    }
+
+    return render(request, 'admin/admin_lsp_profile.html', context)

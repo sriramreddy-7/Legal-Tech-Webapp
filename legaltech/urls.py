@@ -51,7 +51,7 @@ urlpatterns = [
     # path("lsp_base",views.lsp_base,name="lsp_base"),
     path("lsp_dashboard",views.lsp_dashboard,name="lsp_dashboard"),
    
-    
+    path('admin_lsp_profile/<str:username>/',views.admin_lsp_profile,name="admin_lsp_profile"),
     
     
     

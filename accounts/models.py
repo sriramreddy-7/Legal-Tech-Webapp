@@ -36,12 +36,21 @@ class Profile(models.Model):
     
     
 class LSP(models.Model):
+    
+    def upload_path(instance,filename):
+        new_filename=f"{instance.user}.png"
+        return f"LSP/{new_filename}"
+    
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     lsp_type = models.CharField(max_length=100)
-    display_picture = models.ImageField(upload_to='lsp_display_pics/', blank=True)
-    signature = models.ImageField(upload_to='lsp_signature/', blank=True)
+    display_picture = models.ImageField(upload_to=upload_path, blank=True)
+    signature = models.ImageField(upload_to=upload_path, blank=True)
     enrollment_number = models.CharField(max_length=50, unique=True)
-    bar_council_practicing_certificate = models.FileField(upload_to='bar_council_certificates/', blank=True)
+    bar_council_practicing_certificate = models.FileField(upload_to=upload_path, blank=True)
     enrollment_year = models.IntegerField()
     university_llb_completed = models.CharField(max_length=100)
     llb_passout_year = models.IntegerField()
+    
+    
+    
+        

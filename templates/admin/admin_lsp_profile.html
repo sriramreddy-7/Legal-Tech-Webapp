@@ -137,12 +137,6 @@
                 </div>
     
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label">LLB Passout Year</div>
-                  <div class="col-lg-9 col-md-8">
-                    {{ lsp_user.llb_passout_year }}
-                  </div>
-                </div>
-                <div class="row">
                   <div class="col-lg-3 col-md-4 label">Signature</div>
                   <div class="col-lg-9 col-md-8">
                    <img
@@ -159,25 +153,62 @@
             <div class="tab-content pt-2">
               <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
                 <h5 class="card-title">Profile Details</h5>
+                
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">LLB Passout Year</div>
+                  <div class="col-lg-9 col-md-8">
+                    {{ lsp_user.llb_passout_year }}
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">LSP Type</div>
-                  <div class="col-lg-9 col-md-8">{{lsp_user.lsp_type}}</div>
+                  <div class="col-lg-9 col-md-8"> {{ lsp_user.lsp_type}}</div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Gender</div>
-                  <div class="col-lg-9 col-md-8"> {{ user_profile.gender}}</div>
+                  <div class="col-lg-3 col-md-4 label">Enrollment Number</div>
+                  <div class="col-lg-9 col-md-8"> {{ lsp_user.enrollment_number}}</div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Date of Birth</div>
-                  <div class="col-lg-9 col-md-8"> {{ user_profile.date_of_birth}}</div>
+                  <div class="col-lg-3 col-md-4 label">Enrollment Year</div>
+                  <div class="col-lg-9 col-md-8">{{ lsp_user.enrollment_year }}</div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Email</div>
-                  <div class="col-lg-9 col-md-8">{{user.email }}</div>
+                  <div class="col-lg-3 col-md-4 label">University | College</div>
+                  <div class="col-lg-9 col-md-8">{{lsp_user.university_llb_completed }}</div>
                 </div>
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Mobile Number</div>
-                  <div class="col-lg-9 col-md-8">{{user_profile.phone_number }}</div>
+                 <div class="row">
+                  <div class="col-lg-3 col-md-4 label"></div>
+                  <div class="col-lg-9 col-md-8">{{lsp_user.llb_passout_year }}</div>
+                </div>
+                   <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Signature</div>
+                  <div class="col-lg-9 col-md-8">
+                   <img
+                        src="{{ lsp_user.signature.url }}"
+                        alt="Profile"
+                        class="rounded-circle"
+                      />
+                  </div>
+                </div>
+                   <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Signature</div>
+                  <div class="col-lg-9 col-md-8">
+                   <img
+                        src="{{ lsp_user.signature.url }}"
+                        alt="Profile"
+                        class="rounded-circle"
+                      />
+                  </div>
+                </div>
+   <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Signature</div>
+                  <div class="col-lg-9 col-md-8">
+                   <img
+                        src="{{ lsp_user.signature.url }}"
+                        alt="Profile"
+                        class="rounded-circle"
+                      />
+                  </div>
                 </div>
 
                   <div class="text-center">

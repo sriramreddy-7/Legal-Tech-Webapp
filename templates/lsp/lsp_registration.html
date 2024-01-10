@@ -104,6 +104,7 @@
                     <form
                       action="{% url 'lsp_registration' %}"
                       method="post"
+                      enctype="multipart/form-data"
                       class="row g-3 needs-validation"
                       novalidate
                     >
@@ -179,10 +180,11 @@
                           >Mobile Number</label
                         >
                         <input
-                          type="number"
+                          type="text"
                           name="mnumber"
                           class="form-control"
                           id="mnumber"
+                          maxlength="10"
                           required
                         />
                         <div class="invalid-feedback">
@@ -344,6 +346,7 @@
                           name="enrollment_number"
                           class="form-control"
                           id="enrollment_number"
+                          maxlength="12"
                           required
                         />
                         <div class="invalid-feedback">

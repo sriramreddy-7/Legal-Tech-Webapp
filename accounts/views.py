@@ -360,16 +360,20 @@ def lsp_registration(request):
 
 
 def admin_lsp_profile(request,username):
+    # user = get_object_or_404(User, username=username)
     user = get_object_or_404(User, username=username)
-
-    # Retrieve Profile and LSP related to the user
+    
+    # Fetch the user profile based on the 'user' field in the Profile model
     user_profile = get_object_or_404(Profile, user=user)
-    lsp_users = LSP.objects.filter(user=user)
+    
+    # Fetch the LSP details based on the 'user' field in the LSP model
+    lsp_user = get_object_or_404(LSP, user=user)
 
     context = {
-        'user':user,
+        'user': user,
         'user_profile': user_profile,
-        'lsp_users': lsp_users,
+        'lsp_user': lsp_user,
     }
 
     return render(request, 'admin/admin_lsp_profile.html', context)
+   

@@ -321,17 +321,20 @@ def lsp_registration(request):
        )
        lsp_user.save()
        
-       messages.success(request, "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
+       messages.success(
+            request,
+            "Your profile has been created successfully! You will receive a confirmation link after your profile verification. Once verified, activate your account, login, and start offering services on the Legal Tech web app."
+        )
         
         # Welcome Email
-       subject = "Welcome law Desk Login!"
-       message = "Hello " + myuser.first_name + "!! \n" + "Welcome to law Desk!! \nThank you for visiting our website.\nWe have also sent you a confirmation email, please confirm your email address. \n\nThanking You Team Law Desk!"        
+       subject = "Welcome Law Desk Web App"
+       message = "Hello " + myuser.first_name + "!! \n" + "Welcome to law Desk!! Your profile has been created successfully! You will receive a confirmation link after your profile verification. \n Once verified, activate your account, login, and start offering services on the Legal Tech web app.\nThank you for visiting our website. Team Law Desk Web App!"        
        from_email = settings.EMAIL_HOST_USER
        to_list = [myuser.email]
        send_mail(subject, message, from_email, to_list, fail_silently=True)
        
        # Email Address Confirmation Email
-       current_site = get_current_site(request)
+       """current_site = get_current_site(request)
        email_subject = "Confirm your Email @ Law Desk - Login!"
        message2 = render_to_string('email_confirmation.html',{
            'name': myuser.first_name,
@@ -349,7 +352,7 @@ def lsp_registration(request):
        email.fail_silently = True
        email.send()
        
-    #    return HttpResponse("<h1 style='color:green'>LSP User is created !</h1>")
+    #    return HttpResponse("<h1 style='color:green'>LSP User is created !</h1>")"""
        
        return redirect('user_login')
    
@@ -377,3 +380,69 @@ def admin_lsp_profile(request,username):
 
     return render(request, 'admin/admin_lsp_profile.html', context)
    
+   
+   
+def verify_profile(request,username):
+    if request.method=="POST":
+        myuser = get_object_or_404(User, username=username)
+
+        user_profile = get_object_or_404(Profile, user=myuser)
+        if  user_profile.is_service_provider==True:
+            return HttpResponse("LSP is Active")
+        else:
+            user_profile.is_service_provider=True
+            # subject = "Welcome law Desk Login!"
+            # message = "Hello " + myuser.first_name + "!! \n" + "Welcome to law Desk!! \nThank you for visiting our website.\nWe have also sent you a confirmation email, please confirm your email address. \n\nThanking You Team Law Desk!"        
+            # from_email = settings.EMAIL_HOST_USER
+            # to_list = [myuser.email]
+            # send_mail(subject, message, from_email, to_list, fail_silently=True)
+
+            # Email Address Confirmation Email
+            current_site = get_current_site(request)
+            email_subject = "Account Verification Confirmation @ Law Desk - Login!"
+            message2 = render_to_string('email_confirmation.html',{
+                'name': myuser.first_name,
+                'domain': current_site.domain,
+                # 'domain':'https://legal-tech-webapp-git-sriram-sriramreddy-7.vercel.app',
+                'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
+                'token': generate_token.make_token(myuser),
+            })
+            email = EmailMessage(
+            email_subject,
+            message2,
+            settings.EMAIL_HOST_USER,
+            [myuser.email],
+            )
+            email.fail_silently = True
+            email.send()
+
+            return HttpResponse('<h1 style="color:green;">Profile Verified Sucessfully</h1>')
+        
+    else:
+        return HttpResponse("Null Response")
+    
+    
+    
+def lsp_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        user_profile = get_object_or_404(Profile, user=username)
+        if user is not None:
+            if user_profile.is_service_provider==True:
+                login(request, user)
+            # if username == 'lawyer':
+                return redirect("lsp_dashboard")
+            else:
+                return HttpResponse('<h1>"Your profile has been created successfully! You will receive a confirmation link after your profile verification. Once verified, activate your account, login, and start offering services on the Legal Tech web app."</h1>')
+            # elif username == 'admin':
+            #     return redirect('admin_dashboard')
+            # else:
+            #     return render(request,'server/error-404.html')
+                
+        else:
+            messages.error(request, "Bad Credentials!!")
+            return redirect('lsp/lsp_login')
+
+    return render(request,'lsp/lsp_login.html')  

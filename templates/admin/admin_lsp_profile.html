@@ -93,6 +93,16 @@
                 </p>
 
                 <h5 class="card-title">Profile Details</h5>
+            <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Profile</div>
+                  <div class="col-lg-9 col-md-8">
+                   <img
+                        src="{{ lsp_user.profile_picture.url }}"
+                        alt="Signature"
+                        class="rounded-circle"
+                      />
+                  </div>
+                </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Full Name</div>
@@ -177,35 +187,35 @@
                   <div class="col-lg-9 col-md-8">{{lsp_user.university_llb_completed }}</div>
                 </div>
                  <div class="row">
-                  <div class="col-lg-3 col-md-4 label"></div>
+                  <div class="col-lg-3 col-md-4 label">LLB Passout Year</div>
                   <div class="col-lg-9 col-md-8">{{lsp_user.llb_passout_year }}</div>
                 </div>
                    <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Signature</div>
+                  <div class="col-lg-3 col-md-4 label">Display Picture</div>
                   <div class="col-lg-9 col-md-8">
                    <img
-                        src="{{ lsp_user.signature.url }}"
+                        src="{{ lsp_user.display_picture.url }}"
                         alt="Profile"
                         class="rounded-circle"
                       />
                   </div>
                 </div>
                    <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Signature</div>
+                  <div class="col-lg-3 col-md-4 label">Bar Council Practicing Certificate</div>
                   <div class="col-lg-9 col-md-8">
                    <img
-                        src="{{ lsp_user.signature.url }}"
-                        alt="Profile"
+                        src="{{ lsp_user.bar_council_practicing_certificate.url }}"
+                        alt="Bar Council Practicing Certificate"
                         class="rounded-circle"
                       />
                   </div>
                 </div>
-   <div class="row">
+                <div class="row">
                   <div class="col-lg-3 col-md-4 label">Signature</div>
                   <div class="col-lg-9 col-md-8">
                    <img
                         src="{{ lsp_user.signature.url }}"
-                        alt="Profile"
+                        alt="Signature"
                         class="rounded-circle"
                       />
                   </div>
@@ -213,9 +223,18 @@
 
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary">
-                      Save Changes
+                     Approve
+                    </button>
+                    &nbsp;
+                    <button type="submit" class="btn btn-danger">
+                      Reject
                     </button>
                   </div>
+                     <!-- <div class="text-center">
+                    <button type="submit" class="btn btn-danger">
+                      Reject
+                    </button>
+                  </div> -->
                 </form>
                 <!-- End Profile Edit Form -->
               </div>

@@ -18,6 +18,24 @@ def service(request):
 def home2(request):
     return render(request,'home.html')
 
+def notary(request):
+    return render(request,'notary.html')
+    
+def affidavit(request):
+    return render(request,'affidavit.html')
+
+def Agreement(request):
+    return render(request,'Agreement.html')
+
+def help(request):
+    return render(request,'help.html')
+
+def notdoc(request):
+    return render(request,'notdoc.html')
+
+def affdoc(request):
+    return render(request,'affdoc.html')
+
 # def login(request):
 #     return render(request,'login.html')
 

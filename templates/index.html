@@ -117,9 +117,21 @@
                 >Home</a
               >
               <a href="" class="nav-item nav-link">About</a>
-              <a href="{% url 'service' %}" class="nav-item nav-link"
-                >Services</a
-              >
+              <div class="nav-item dropdown">
+                <a
+                  href="#"
+                  class="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  >Services</a
+                >
+                <div
+                  class="dropdown-menu bg-light rounded-0 rounded-bottom m-0"
+                >
+                  <a href="{% url 'notary' %}" class="dropdown-item">Notary</a>
+                  <a href="{% url 'affidavit' %}" class="dropdown-item">Affidavit</a>
+                  <a href="{% url 'Agreement' %}" class="dropdown-item">Agreement</a>
+                </div>
+              </div>
               <a href="" class="nav-item nav-link">Testimonials</a>
               <div class="nav-item dropdown">
                 <a

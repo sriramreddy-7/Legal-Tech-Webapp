@@ -29,6 +29,12 @@ urlpatterns = [
     path("service",views.service,name="service"),
     path("lsp_base",views.lsp_base,name="lsp_base"),
     path("lsp_dashboard",views.lsp_dashboard,name="lsp_dashboard"),
+    path("notary",views.notary,name="notary"),
+    path("affidavit",views.affidavit,name="affidavit"),
+    path("Agreement",views.Agreement,name="Agreement"),
+    path("help",views.help,name="help"),
+    path("notdoc",views.notdoc,name="notdoc"),
+    path("affdoc",views.affdoc,name="affdoc"),
     # path("login",views.login,name="login"),
     
     

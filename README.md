@@ -34,12 +34,6 @@ Incentives based Design for onboarding Legal Service Providers such as Advocates
 ## About the Project
 This project aims to create an online marketplace that incentivizes legal service providers to offer their expertise to citizens in need of legal services. By bringing together various legal professionals onto a single platform, we intend to bridge the gap between legal service providers and citizens seeking legal advice or assistance in India. Our focus includes creating an intuitive, secure, and accessible platform that caters to the diverse legal needs of individuals and businesses.
 
-## Getting Started
-To get started with the project, follow these steps:
-1. Clone the repository.
-2. Install the necessary dependencies.
-3. Set up the database and environment configurations.
-4. Run the application.
 
 ## Usage
 Once the application is up and running, users can:

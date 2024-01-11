@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     # 'whitenoise.runserver_nonstatic',
     'django.contrib.staticfiles',
+    #  'djongo',
     # 'allauth',
     # 'allauth.account',
     # 'allauth.socialaccount',
@@ -111,9 +112,26 @@ WSGI_APPLICATION = 'legaltech.wsgi.app'
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.parse('postgresql://postgres:dC4GCC-6g3Efg3FFBGffcC6cCbG*-BCC@roundhouse.proxy.rlwy.net:21684/railway')
-    # 'default': dj_database_url.parse('postgres://crazycoders:MkaIZ4K82Qf4FsK8DmXcFeZ2CAIM2vaw@dpg-cm8p4p6d3nmc73b0dojg-a.oregon-postgres.render.com/pec_render_database')
+    # 'default': dj_database_url.parse('postgresql://postgres:dC4GCC-6g3Efg3FFBGffcC6cCbG*-BCC@roundhouse.proxy.rlwy.net:21684/railway')
+    'default': dj_database_url.parse('postgres://crazycoders:MkaIZ4K82Qf4FsK8DmXcFeZ2CAIM2vaw@dpg-cm8p4p6d3nmc73b0dojg-a.oregon-postgres.render.com/pec_render_database')
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',  # Use djongo connector for MongoDB
+#         'NAME': 'mongodb',
+#         'CLIENT': {
+#             'host': 'roundhouse.proxy.rlwy.net',
+#             'username': 'mongo',
+#             'password': 'eFGfG-A-3aGDbgbAfDf-bGcHH1hGe4E4',
+#             'authMechanism': 'SCRAM-SHA-1',  # Authentication mechanism required by Railway
+#         }
+#     }
+# }
+
+
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

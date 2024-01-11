@@ -111,8 +111,8 @@ WSGI_APPLICATION = 'legaltech.wsgi.app'
 import dj_database_url
 
 DATABASES = {
-    #'default': dj_database_url.parse('postgresql://postgres:2CdCdE2c4B-aDcA5d64eFGcda5AG1-fG@roundhouse.proxy.rlwy.net:30056/railway')
-    'default': dj_database_url.parse('postgres://crazycoders:MkaIZ4K82Qf4FsK8DmXcFeZ2CAIM2vaw@dpg-cm8p4p6d3nmc73b0dojg-a.oregon-postgres.render.com/pec_render_database')
+    'default': dj_database_url.parse('postgresql://postgres:dC4GCC-6g3Efg3FFBGffcC6cCbG*-BCC@roundhouse.proxy.rlwy.net:21684/railway')
+    # 'default': dj_database_url.parse('postgres://crazycoders:MkaIZ4K82Qf4FsK8DmXcFeZ2CAIM2vaw@dpg-cm8p4p6d3nmc73b0dojg-a.oregon-postgres.render.com/pec_render_database')
 }
 
 # Password validation

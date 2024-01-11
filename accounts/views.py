@@ -45,9 +45,6 @@ def admin_dashboard(request):
     return render(request,'admin/admin_dashboard.html')
 
 
-
-
-
 def user_registration(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -281,10 +278,10 @@ def lsp_registration(request):
       
        if User.objects.filter(username=username):
             messages.error(request, "Username already exist! Please try some other username.")
-            return redirect('client_registration')
+            return redirect('lsp_registration')
        if User.objects.filter(email=email).exists():
            messages.error(request, "Email Already Registered!!")
-           return redirect('client_registration')
+           return redirect('lsp_registration')
        
        if not username.isalnum():
            messages.error(request, "Username must be Alpha-Numeric!!")
@@ -440,9 +437,43 @@ def lsp_login(request):
             #     return redirect('admin_dashboard')
             # else:
             #     return render(request,'server/error-404.html')
-                
+    
         else:
             messages.error(request, "Bad Credentials!!")
             return redirect('lsp/lsp_login')
 
     return render(request,'lsp/lsp_login.html')  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

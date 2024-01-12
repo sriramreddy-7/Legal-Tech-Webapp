@@ -33,8 +33,10 @@ class Profile(models.Model):
     is_client = models.BooleanField(default=False)
     is_service_provider = models.BooleanField(default=False)
     
-    
-    
+    def __str__(self):
+        return str(self.user.username)
+
+
 class LSP(models.Model):
     
     def upload_path(instance,filename):
@@ -51,6 +53,8 @@ class LSP(models.Model):
     university_llb_completed = models.CharField(max_length=100)
     llb_passout_year = models.IntegerField()
     
+    def __str__(self):
+        return str(self.user.username)
     
     
         

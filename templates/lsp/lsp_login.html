@@ -102,7 +102,7 @@
                     </div>
 
                     <form
-                      action="{% url 'lsp_login' %}"
+                      action="{% url 'accounts:lsp_login' %}"
                       method="post"
                       class="row g-3 needs-validation"
                       novalidate
@@ -167,7 +167,7 @@
                       <div class="col-12">
                         <p class="small mb-0">
                           Don't have account?
-                          <a href="{% url 'user_registration' %}"
+                          <a href="{% url 'accounts:lsp_registration' %}"
                             >Create an account</a
                           >
                         </p>

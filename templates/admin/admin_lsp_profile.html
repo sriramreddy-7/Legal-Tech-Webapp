@@ -239,7 +239,7 @@
                 </div>
                 <form
                  
-                  action="{% url 'verify_profile' user.username %}"
+                  action="{% url 'admin_app:verify_profile' user.username %}"
                    method="post"
                 >
                   {% csrf_token %}

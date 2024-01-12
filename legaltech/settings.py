@@ -47,6 +47,10 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.github',
     'accounts',
+    "home",
+    "client",
+    "lsp",
+    "admin_app",
 ]
 
 MIDDLEWARE = [

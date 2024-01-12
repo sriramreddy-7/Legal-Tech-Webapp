@@ -16,33 +16,49 @@ from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
-def home(request):
-    return render(request,'home.html')
 
-# def admin_base(request):
-#     try:
-#         return render(request,'admin_base.html')
-#     except:
-#         return render(request,'error-404.html')
-
-# def lsp_base(request):
-#     return render(request,'lsp_base.html')
 
 
 def client_login(request):
-    return render(request,'client_login.html')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # if username == 'lawyer':
+            return redirect("client:client_dashboard")
+            # elif username == 'admin':
+            #     return redirect('admin_dashboard')
+            # else:
+            #     return render(request,'server/error-404.html')
+                
+        else:
+            messages.error(request, "Bad Credentials!!")
+            return redirect('client/client_login')
 
-def service(request):
-    return render(request,'service.html')
+    return render(request,'client/client_login.html')
 
-def home2(request):
-    return render(request,'home.html')
 
-def lsp_dashboard(request):
-    return render(request,'lsp/lsp_dashboard.html')
+def lsp_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # if username == 'lawyer':
+            return redirect("lsp:lsp_dashboard")
+            # elif username == 'admin':
+            #     return redirect('admin_dashboard')
+            # else:
+            #     return render(request,'server/error-404.html')
+                
+        else:
+            messages.error(request, "Bad Credentials!!")
+            return redirect('lsp/lsp_login')
 
-def admin_dashboard(request):
-    return render(request,'admin/admin_dashboard.html')
+    return render(request,'lsp/lsp_login.html')
 
 
 def user_registration(request):
@@ -102,25 +118,6 @@ def user_registration(request):
     
     return render(request,'client/client_registration.html')
 
-
-
-def activate(request,uidb64,token):
-    try:
-        uid = force_str(urlsafe_base64_decode(uidb64))
-        myuser = User.objects.get(pk=uid)
-    except (TypeError,ValueError,OverflowError,User.DoesNotExist):
-        myuser = None
-
-    if myuser is not None and generate_token.check_token(myuser,token):
-        myuser.is_active = True
-        # user.profile.signup_confirmation = True
-        myuser.save()
-        login(request,myuser)
-        messages.success(request, "Your Account has been activated!!")
-        return redirect('user_login')
-    else:
-        return render(request,'activation_failed.html')
-    
     
 def user_login(request):
     if request.method == 'POST':
@@ -130,7 +127,7 @@ def user_login(request):
         if user is not None:
             login(request, user)
             # if username == 'lawyer':
-            return redirect("lsp_dashboard")
+            return redirect("lsp:lsp_dashboard")
             # elif username == 'admin':
             #     return redirect('admin_dashboard')
             # else:
@@ -143,37 +140,10 @@ def user_login(request):
     return render(request,'client/user_login.html')
 
 
-def users_list(request):
-    # user_det=User.objects.all()
-    # profile_user=Profile.objects.all()
-    # lsp_users= LSP.objects.all()
-    lsp_users = LSP.objects.filter(lsp_type='Lawyer')
-    profiles = Profile.objects.filter(user__in=lsp_users.values('user'))
-    user_det = User.objects.filter(pk__in=lsp_users.values('user'))
-
-    profiles_with_lsps = []
-
-    for i in range(len(lsp_users)):
-        profiles_with_lsps.append({
-            'user_det': user_det[i],
-            'lsp_user': lsp_users[i],
-            'profile': profiles[i],
-        })
-
-    context = {
-        'profiles_with_lsps': profiles_with_lsps,
-    }
-    
-    return render(request,'admin/users_list.html',context)
-    
-    # return render(request,'admin/users_list.html')
-
-
 def user_logout(request):
     if request.user.is_authenticated:
         logout(request)
     return redirect('home')
-
 
 
 def client_registration(request):
@@ -192,10 +162,10 @@ def client_registration(request):
        zipcode=request.POST.get('zipcode')
        if User.objects.filter(username=username):
             messages.error(request, "Username already exist! Please try some other username.")
-            return redirect('client_registration')
+            return redirect('accounts:client_registration')
        if User.objects.filter(email=email).exists():
            messages.error(request, "Email Already Registered!!")
-           return redirect('client_registration')
+           return redirect('accounts:client_registration')
        
        if not username.isalnum():
            messages.error(request, "Username must be Alpha-Numeric!!")
@@ -245,14 +215,12 @@ def client_registration(request):
        )
        email.fail_silently = True
        email.send()   
-       return redirect('user_login')
+       return redirect('accounts:client_login')
     
     else:
         print("Iam in inside the Else Block")
         return render(request,'client/client_registration.html')
-    
-    
-    
+       
 def lsp_registration(request):
     if request.method == "POST":
        username = request.POST.get('username')
@@ -278,10 +246,10 @@ def lsp_registration(request):
       
        if User.objects.filter(username=username):
             messages.error(request, "Username already exist! Please try some other username.")
-            return redirect('lsp_registration')
+            return redirect('accounts:lsp_registration')
        if User.objects.filter(email=email).exists():
            messages.error(request, "Email Already Registered!!")
-           return redirect('lsp_registration')
+           return redirect('accounts:lsp_registration')
        
        if not username.isalnum():
            messages.error(request, "Username must be Alpha-Numeric!!")
@@ -351,128 +319,11 @@ def lsp_registration(request):
        
     #    return HttpResponse("<h1 style='color:green'>LSP User is created !</h1>")"""
        
-       return redirect('user_login')
+       return redirect('accounts:lsp_login')
    
     return render(request,'lsp/lsp_registration.html')
 
-
-
-
-
-def admin_lsp_profile(request,username):
-    # user = get_object_or_404(User, username=username)
-    user = get_object_or_404(User, username=username)
     
-    # Fetch the user profile based on the 'user' field in the Profile model
-    user_profile = get_object_or_404(Profile, user=user)
-    
-    # Fetch the LSP details based on the 'user' field in the LSP model
-    lsp_user = get_object_or_404(LSP, user=user)
-
-    context = {
-        'user': user,
-        'user_profile': user_profile,
-        'lsp_user': lsp_user,
-    }
-
-    return render(request, 'admin/admin_lsp_profile.html', context)
-   
-   
-   
-def verify_profile(request,username):
-    if request.method=="POST":
-        myuser = get_object_or_404(User, username=username)
-
-        user_profile = get_object_or_404(Profile, user=myuser)
-        if  user_profile.is_service_provider==True:
-            return HttpResponse("LSP is Active")
-        else:
-            user_profile.is_service_provider=True
-            # subject = "Welcome law Desk Login!"
-            # message = "Hello " + myuser.first_name + "!! \n" + "Welcome to law Desk!! \nThank you for visiting our website.\nWe have also sent you a confirmation email, please confirm your email address. \n\nThanking You Team Law Desk!"        
-            # from_email = settings.EMAIL_HOST_USER
-            # to_list = [myuser.email]
-            # send_mail(subject, message, from_email, to_list, fail_silently=True)
-
-            # Email Address Confirmation Email
-            current_site = get_current_site(request)
-            email_subject = "Account Verification Confirmation @ Law Desk - Login!"
-            message2 = render_to_string('email_confirmation.html',{
-                'name': myuser.first_name,
-                'domain': current_site.domain,
-                # 'domain':'https://legal-tech-webapp-git-sriram-sriramreddy-7.vercel.app',
-                'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
-                'token': generate_token.make_token(myuser),
-            })
-            email = EmailMessage(
-            email_subject,
-            message2,
-            settings.EMAIL_HOST_USER,
-            [myuser.email],
-            )
-            email.fail_silently = True
-            email.send()
-
-            return HttpResponse('<h1 style="color:green;">Profile Verified Sucessfully</h1>')
-        
-    else:
-        return HttpResponse("Null Response")
-    
-    
-    
-def lsp_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
-        user_profile = get_object_or_404(Profile, user=username)
-        if user is not None:
-            if user_profile.is_service_provider==True:
-                login(request, user)
-            # if username == 'lawyer':
-                return redirect("lsp_dashboard")
-            else:
-                return HttpResponse('<h1>"Your profile has been created successfully! You will receive a confirmation link after your profile verification. Once verified, activate your account, login, and start offering services on the Legal Tech web app."</h1>')
-            # elif username == 'admin':
-            #     return redirect('admin_dashboard')
-            # else:
-            #     return render(request,'server/error-404.html')
-    
-        else:
-            messages.error(request, "Bad Credentials!!")
-            return redirect('lsp/lsp_login')
-
-    return render(request,'lsp/lsp_login.html')  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

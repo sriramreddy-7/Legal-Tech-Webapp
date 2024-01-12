@@ -19,25 +19,27 @@ from accounts import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+app_name="accounts"
 
 urlpatterns = [
     
-    path('admin/', admin.site.urls),
-    # path('accounts/',include('accounts.urls')),
-    path("",views.home,name="home"),
-    path("home",views.home2,name="home"), 
-    path('activate/<uidb64>/<token>', views.activate, name='activate'),
+    path('client_login',views.client_login,name="client_login"),
+    path('user_logout',views.user_logout,name="user_logout"),
+    path("client_registration",views.client_registration,name="client_registration"),
+    path("lsp_login",views.lsp_login,name="lsp_login"),
+    path('lsp_registration',views.lsp_registration,name="lsp_registration"),
+    # path("login",views.login,name="login"),
+    # path('admin/', admin.site.urls),
+    # # path('accounts/',include('accounts.urls')),
+    # path("",views.home,name="home"),
+    # path("home",views.home2,name="home"), 
+    # path('activate/<uidb64>/<token>', views.activate, name='activate'),
     # path("admin_base",views.admin_base,name="admin_base"),
-    path("admin_dashboard",views.admin_dashboard,name="admin_dashboard"),
-    path("lsp_dashboard",views.lsp_dashboard,name="lsp_dashboard"),
-    path("user_login",views.user_login,name="user_login"),
-    path("service",views.service,name="service"),
+    # path("admin_dashboard",views.admin_dashboard,name="admin_dashboard"),
+    # path("lsp_dashboard",views.lsp_dashboard,name="lsp_dashboard"),
+    # path("service",views.service,name="service"),
     # path("lsp_base",views.lsp_base,name="lsp_base"),
-    path("lsp_dashboard",views.lsp_dashboard,name="lsp_dashboard"),
-    path("user_registration",views.user_registration,name="user_registration"),
-    path('user_login',views.user_login,name="user_login"),
-    path("login",views.login,name="login"),
-   
+    # path("lsp_dashboard",views.lsp_dashboard,name="lsp_dashboard"),
    
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

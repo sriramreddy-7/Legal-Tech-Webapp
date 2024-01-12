@@ -34,7 +34,7 @@
                     <th>User Type</th>
                     <th>Action</th>
                   </tr>
-                </thead>
+                </thead> 
                 <tbody>
                     {% for user in profiles_with_lsps %}
                   <tr>
@@ -43,7 +43,7 @@
                     <td>{{ user.user_det.username }}</td>
                     <td>{{ user.user_det.date_joined}}</td>
                     <td>{{ user.lsp_user.lsp_type}}</td>
-                    <td> <a type="button" href="admin_lsp_profile/{{ user.user_det.username }}/" class="btn btn-primary"><i class="bi bi-info-circle"></i>&nbsp;View</a></td>
+                    <td> <a type="button" href="{% url 'admin_app:admin_lsp_profile' user.user_det.username  %}" class="btn btn-primary"><i class="bi bi-info-circle"></i>&nbsp;View</a></td>
                   </tr>
                   {% endfor %}
                 </tbody>

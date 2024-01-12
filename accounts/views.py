@@ -45,10 +45,19 @@ def lsp_login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
+        myuser = get_object_or_404(User, username=username)
+        user_profile = get_object_or_404(Profile, user=myuser)
         if user is not None:
             login(request, user)
+            if username == 'admin':
             # if username == 'lawyer':
-            return redirect("lsp:lsp_dashboard")
+                return redirect("lsp:lsp_dashboard")
+            
+            elif  (user_profile.is_service_provider)==True:
+                return redirect("lsp:lsp_dashboard")
+            
+            elif (user_profile.is_service_provider)==False:
+                return HttpResponse("<h1 style='color:red'>Hello {{ myuser.first_name }} is not yet activated ! Please Login after account confirmation </h1>")
             # elif username == 'admin':
             #     return redirect('admin_dashboard')
             # else:
@@ -56,7 +65,7 @@ def lsp_login(request):
                 
         else:
             messages.error(request, "Bad Credentials!!")
-            return redirect('lsp/lsp_login')
+            return redirect('accounts:lsp_login')
 
     return render(request,'lsp/lsp_login.html')
 

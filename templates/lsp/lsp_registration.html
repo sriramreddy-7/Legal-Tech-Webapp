@@ -366,13 +366,13 @@
                           id="bar_council_practicing_certificate"
                         />
                       </div>
- <div class="col-6">
+                      <div class="col-6">
                         <label for="university_llb_completed" class="form-label"
                           >University LLB Completed</label
                         >
                         <select
                           name="university_name"
-                          class="form-select dropup"
+                          class="form-select"
                           id="university_llb_completed"
                           required
                         >
@@ -380,29 +380,93 @@
                             Select University
                           </option>
 
-                          <option value="University A">NLU Delhi</option>
-                          <option value="University B">CLU Hyderabad</option>
-                          <option value="University C">TLU Tamil Nadu</option>
+                          <option
+                            value="National Law School of India University, Bangalore"
+                          >
+                            National Law School of India University, Bangalore
+                          </option>
+                          <option value="National Law University, Delhi">
+                            National Law University, Delhi
+                          </option>
+                          <option value="NALSAR University of Law, Hyderabad">
+                            NALSAR University of Law, Hyderabad
+                          </option>
+
+                          <option
+                            value="The West Bengal National University of Juridical Sciences, Kolkata"
+                          >
+                            The West Bengal National University of Juridical
+                            Sciences, Kolkata
+                          </option>
+
+                          <option value="National Law University, Jodhpur">
+                            National Law University, Jodhpur
+                          </option>
+
+                          <option value="National Law University, Odisha">
+                            National Law University, Odisha
+                          </option>
+                          <option value="National Law University, Lucknow">
+                            National Law University, Lucknow
+                          </option>
+                          <option value="Symbiosis Law School, Pune">
+                            Symbiosis Law School, Pune
+                          </option>
+                          <option
+                            value="Jamia Millia Islamia, Faculty of Law, New Delhi"
+                          >
+                            Jamia Millia Islamia, Faculty of Law, New Delhi
+                          </option>
+                          <option value="National Law University, Gujarat">
+                            National Law University, Gujarat
+                          </option>
+
+                          <option
+                            value="Rajiv Gandhi National University of Law, Patiala"
+                          >
+                            Rajiv Gandhi National University of Law, Patiala
+                          </option>
+
+                          <option
+                            value="Dr. Ram Manohar Lohiya National Law University, Lucknow"
+                          >
+                            Dr. Ram Manohar Lohiya National Law University,
+                            Lucknow
+                          </option>
+
+                          <option
+                            value="National Law University and Judicial Academy, Assam"
+                          >
+                            National Law University and Judicial Academy, Assam
+                          </option>
+
+                          <option value="National Law University, Kerala">
+                            National Law University, Kerala
+                          </option>
+                          <option value="National Law University, Tamil Nadu">
+                            National Law University, Tamil Nadu
+                          </option>
+                          <option value="Other">Other</option>
                         </select>
                         <div class="invalid-feedback">
                           Please select the University where LLB was completed!
                         </div>
                       </div>
 
-<div class="col-6">
+                      <div class="col-6">
                         <label for="llb_passout_year" class="form-label"
                           >LLB Passout Year</label
                         >
                         <select
                           name="llb_passout_year"
-                          class="form-select dropdown"
+                          class="form-select"
                           id="llb_passout_year"
                           required
                         >
                           <option value="" selected disabled>
                             Select Passout Year
                           </option>
-                          
+
                           <option value="2024">2024</option>
                           <option value="2023">2023</option>
                           <option value="2022">2022</option>
@@ -455,12 +519,11 @@
                         </div>
                       </div>
 
-
                       <div class="col-6">
                         <label for="enrollment_year" class="form-label"
                           >Enrollment Year</label
                         >
-                         <select
+                        <select
                           name="enrollment_year"
                           class="form-select"
                           id="enrollment_year"
@@ -469,18 +532,12 @@
                           <option value="" selected disabled>
                             Select Enrollment Year
                           </option>
-                          
                         </select>
-                       
 
                         <div class="invalid-feedback">
                           Please select the Enrollment Year!
                         </div>
                       </div>
-
-                     
-
-                      
 
                       <div class="col-6">
                         <label for="yourPassword" class="form-label"
@@ -552,12 +609,15 @@
       </div>
     </main>
     <script>
-      document.getElementById("llb_passout_year").addEventListener("change", function () {
+      document
+        .getElementById("llb_passout_year")
+        .addEventListener("change", function () {
           var llbPassoutYear = parseInt(this.value);
-          var enrollmentYearDropdown =  document.getElementById("enrollment_year");
-          enrollmentYearDropdown.innerHTML =  '<option value="" selected disabled>Select Enrollment Year</option>';
+          var enrollmentYearDropdown =
+            document.getElementById("enrollment_year");
+          enrollmentYearDropdown.innerHTML =
+            '<option value="" selected disabled>Select Enrollment Year</option>';
 
-          
           for (var year = llbPassoutYear + 1; year <= 2024; year++) {
             var option = document.createElement("option");
             option.value = year;

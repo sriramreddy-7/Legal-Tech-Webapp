@@ -36,7 +36,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="{% url 'admin_dashboard' %}" class="logo d-flex align-items-center">
+      <a href="{% url 'admin_app:admin_dashboard' %}" class="logo d-flex align-items-center">
         <img src="{% static 'dash/img/logo.png' %}" alt="">
         <span class="d-none d-lg-block">Legal Tech </span>
       </a>
@@ -247,7 +247,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'accounts:user_logout' %}">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>  <Label> Logout</Label> </span>
               </a>
@@ -267,7 +267,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="{% url 'admin_dashboard' %}">
+        <a class="nav-link " href="{% url 'admin_app:admin_dashboard' %}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -279,7 +279,7 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="{% url 'users_list' %}">
+            <a href="{% url 'admin_app:users_list' %}">
               <i class="bi bi-circle"></i><span>Users List</span>
             </a>
           </li>

@@ -131,15 +131,15 @@
                 <div
                   class="dropdown-menu bg-light rounded-0 rounded-bottom m-0"
                 >
-                  <a href="{% url 'user_login' %}" class="dropdown-item"
-                    >User Login</a
+                  <a href="{% url 'accounts:client_login' %}" class="dropdown-item"
+                    >Client | User Login</a
                   >
-                  <a href="{% url 'lsp_login' %}" class="dropdown-item"
+                  <a href="{% url 'accounts:lsp_login' %}" class="dropdown-item"
                     >LSP Login</a
                   >
-                  <!-- <a href="{% url 'user_login' %}" class="dropdown-item"
+                 {% comment %} <!-- <a href="{% url 'user_login' %}" class="dropdown-item"
                     >Admin Login</a
-                  > -->
+                  > --> {% endcomment %}
                 </div>
               </div>
               <div class="nav-item dropdown">
@@ -152,15 +152,15 @@
                 <div
                   class="dropdown-menu bg-light rounded-0 rounded-bottom m-0"
                 >
-                  <a href="{% url 'client_registration' %}" class="dropdown-item">Client / User Registration</a>
-                  <a href="{% url 'lsp_registration' %}" class="dropdown-item">LSP Registration</a>
+                  <a href="{% url 'accounts:client_registration' %}" class="dropdown-item">Client / User Registration</a>
+                  <a href="{% url 'accounts:lsp_registration' %}" class="dropdown-item">LSP Registration</a>
                 </div>
               </div>
               <a href="" class="nav-item nav-link">Contact</a>
             </div>
             <div class="ms-auto d-none d-lg-block">
               <a
-                href="{% url 'admin_dashboard' %}"
+                href="{% url 'admin_app:admin_dashboard' %}"
                 class="btn btn-primary rounded-pill py-2 px-3"
                 >Admin Base</a
               >

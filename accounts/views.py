@@ -47,17 +47,17 @@ def lsp_login(request):
         myuser = get_object_or_404(User, username=username)
         print(f'myuser->{myuser}')
         user_profile = get_object_or_404(Profile, user=myuser)
-        print(f'user_profile->{user_profile}')
+        print(f'user_profile->{user_profile.is_service_provider}')
         if user is not None:
             print(login(request, user))
             if username == 'admin':
             # if username == 'lawyer':
                 return redirect("lsp:lsp_dashboard")
             
-            elif  (user_profile.is_service_provider)=="True":
+            elif  (user_profile.is_service_provider)==True:
                 return redirect("lsp:lsp_dashboard")
             
-            elif (user_profile.is_service_provider)=="False":
+            elif (user_profile.is_service_provider)==False:
                 return HttpResponse("<h1 style='color:red'>Hello {{ myuser.first_name }} is not yet activated ! Please Login after account confirmation </h1>")
             
             else:

@@ -58,3 +58,10 @@ class LSP(models.Model):
     
     
         
+        
+class Message(models.Model):
+    user_profile = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    
+    

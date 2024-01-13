@@ -35,9 +35,7 @@ urlpatterns = [
     path("home",views.home,name="home"), 
     path('activate/<uidb64>/<token>', views.activate, name='activate'),
     path("service",views.service,name="service"),
-    path('chat/', views.chat_page, name='chat_page'),
-    path('get_messages/', views.get_messages, name='get_messages'),
-    path('post_message/', views.post_message, name='post_message'),
+   
     
     
    

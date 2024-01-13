@@ -44,18 +44,3 @@ def activate(request,uidb64,token):
         return render(request,'activation_failed.html')
     
 
-def chat_page(request):
-    return render(request, 'chat.html')
-
-
-def get_messages(request):
-    messages = Message.objects.all().order_by('-timestamp')[:10]
-    data = {'messages': [{'user': msg.user_profile.user.username, 'content': msg.content, 'timestamp': msg.timestamp} for msg in messages]}
-    return JsonResponse(data)
-
-
-def post_message(request):
-    user_profile = User.objects.get(user=request.user)
-    content = request.POST.get('content')
-    Message.objects.create(user_profile=user_profile, content=content)
-    return JsonResponse({'status': 'ok'})

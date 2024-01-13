@@ -89,19 +89,20 @@ def verify_profile(request,username):
 def admin_lsp_profile(request,username):
     # user = get_object_or_404(User, username=username)
     user = get_object_or_404(User, username=username)
-    
+    print("e1")
     # Fetch the user profile based on the 'user' field in the Profile model
     user_profile = get_object_or_404(Profile, user=user)
-    
+    print("e2")
     # Fetch the LSP details based on the 'user' field in the LSP model
     lsp_user = get_object_or_404(LSP, user=user)
-
+    print("e3")
     context = {
         'user': user,
         'user_profile': user_profile,
         'lsp_user': lsp_user,
     }
-
+    print("e4")
+    
     return render(request, 'admin/admin_lsp_profile.html', context)
    
    

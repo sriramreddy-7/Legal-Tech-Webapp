@@ -14,10 +14,7 @@ from accounts.models import Profile,LSP
 from django.shortcuts import get_object_or_404
 # from accounts.models Profile
 
-
 # Create your views here.
-
-
 
 def client_login(request):
     if request.method == 'POST':
@@ -44,20 +41,30 @@ def lsp_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        print(username,password)
         user = authenticate(username=username, password=password)
+        print(f'user->{user}')
         myuser = get_object_or_404(User, username=username)
+        print(f'myuser->{myuser}')
         user_profile = get_object_or_404(Profile, user=myuser)
+        print(f'user_profile->{user_profile}')
         if user is not None:
-            login(request, user)
+            print(login(request, user))
             if username == 'admin':
             # if username == 'lawyer':
                 return redirect("lsp:lsp_dashboard")
             
-            elif  (user_profile.is_service_provider)==True:
+            elif  (user_profile.is_service_provider)=="True":
                 return redirect("lsp:lsp_dashboard")
             
-            elif (user_profile.is_service_provider)==False:
+            elif (user_profile.is_service_provider)=="False":
                 return HttpResponse("<h1 style='color:red'>Hello {{ myuser.first_name }} is not yet activated ! Please Login after account confirmation </h1>")
+            
+            else:
+                messages.error(request, "Bad Credentials!!")
+                print("error login-1")
+                return redirect('accounts:lsp_login')
+                
             # elif username == 'admin':
             #     return redirect('admin_dashboard')
             # else:
@@ -65,6 +72,7 @@ def lsp_login(request):
                 
         else:
             messages.error(request, "Bad Credentials!!")
+            print("error login-2")
             return redirect('accounts:lsp_login')
 
     return render(request,'lsp/lsp_login.html')

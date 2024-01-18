@@ -13,10 +13,14 @@ from accounts.tokens import generate_token
 from accounts.models import Profile,LSP
 from django.shortcuts import get_object_or_404
 from accounts import views
-
+from accounts.models import LSP
 
 
 
     
 def client_dashboard(request):
     return render(request,'client/client_dashboard.html')
+
+def lsp_view(request):
+    lsp=LSP.objects.all()
+    return render(request,"client/lsp_view.html",{'lsp':lsp})

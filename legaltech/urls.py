@@ -35,7 +35,7 @@ urlpatterns = [
     path("home",views.home,name="home"), 
     path('activate/<uidb64>/<token>', views.activate, name='activate'),
     path("service",views.service,name="service"),
-    
+   
     
     
    

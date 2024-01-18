@@ -48,12 +48,12 @@ def users_list(request):
 def verify_profile(request,username):
     if request.method=="POST":
         myuser = get_object_or_404(User, username=username)
-
         user_profile = get_object_or_404(Profile, user=myuser)
         if  user_profile.is_service_provider==True:
             return HttpResponse("LSP is Active")
         else:
             user_profile.is_service_provider=True
+            print(user_profile.save())
             # subject = "Welcome law Desk Login!"
             # message = "Hello " + myuser.first_name + "!! \n" + "Welcome to law Desk!! \nThank you for visiting our website.\nWe have also sent you a confirmation email, please confirm your email address. \n\nThanking You Team Law Desk!"        
             # from_email = settings.EMAIL_HOST_USER

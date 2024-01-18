@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse ,JsonResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.mail import EmailMessage, send_mail
@@ -10,9 +10,13 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes,force_str
 from django.contrib.auth import authenticate, login, logout
 from accounts.tokens import generate_token
-from accounts.models import Profile,LSP
+from accounts.models import Profile,LSP,Message
 from django.shortcuts import get_object_or_404
+# chat/views.py
 
+
+# from django.contrib.auth.decorators import login_required
+# from .models import Message, UserProfile
 
 
 
@@ -38,3 +42,5 @@ def activate(request,uidb64,token):
         return redirect('home')
     else:
         return render(request,'activation_failed.html')
+    
+

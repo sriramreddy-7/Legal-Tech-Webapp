@@ -61,7 +61,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
         <a
-          href="{% url 'lsp:lsp_dashboard' %}"
+          href="{% url 'client:client_dashboard' %}"
           class="logo d-flex align-items-center"
         >
           <img src="{% static 'dash/img/logo.png' %}" alt="" />
@@ -73,7 +73,7 @@
 
       <div class="search-bar">
         <form class="search-form d-flex align-items-center">
-          <span class="d-none d-lg-block">LSP Dashboard</span>
+          <span class="d-none d-lg-block">Client Dashboard</span>
         </form>
       </div>
 
@@ -286,10 +286,7 @@
               </li>
 
               <li>
-                <a
-                  class="dropdown-item d-flex align-items-center"
-                  href="{% url 'lsp:lsp_profile' user.username %}"
-                >
+                <a class="dropdown-item d-flex align-items-center" href="">
                   <i class="bi bi-person"></i>
                   <span>My Profile</span>
                 </a>
@@ -347,17 +344,14 @@
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'lsp:lsp_dashboard' %}">
+          <a class="nav-link" href="{% url 'client:client_dashboard' %}">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
         </li>
-        
+
         <li class="nav-item">
-          <a
-            class="nav-link collapsed"
-            href="{% url 'chat_users_list' %}"
-          >
+          <a class="nav-link collapsed" href="{% url 'chat_users_list' %}">
             <i class="bi bi-person"></i>
             <span>Chat</span>
           </a>
@@ -373,7 +367,7 @@
               <i class="bi bi-circle"></i><span>{{ user.first_name }} {{ user.last_name }}</span>
             </a>
           </li> -->
-         
+
         <!-- </ul>
       </li> -->
 
@@ -472,10 +466,7 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-          <a
-            class="nav-link collapsed"
-            href="{% url 'lsp:lsp_profile' user.username %}"
-          >
+          <a class="nav-link collapsed" href="">
             <i class="bi bi-person"></i>
             <span>Profile</span>
           </a>

@@ -30,19 +30,27 @@ urlpatterns = [
     path("admin_app/",include('admin_app.urls',namespace="admin_app")),
     path("accounts/",include('accounts.urls',namespace="accounts")),
     
-    
     path("",views.home,name="home"),
     path("home",views.home,name="home"), 
     path('activate/<uidb64>/<token>', views.activate, name='activate'),
     path("service",views.service,name="service"),
-   
+    
+    path('chat_users_list',views.chat_users_list,name="chat_users_list"),
+    path("room/<str:friendusername>",views.room,name='room'),
+    path("checkview/<str:friendusername>/",views.checkview,name='checkview'),
+    path("send",views.send,name='send'),
+    path("getmessages/<str:friend>",views.getmessages,name='getmessages'),
+    path("friends",views.friends,name='friends'),
+    path("removefriend",views.removefriend,name='removefriend'),
+    path("uploadfiles/<str:friend>",views.uploadfiles,name='uploadfiles'),
+    path('chat_friends',views.chat_friends,name='chat_friends'),
+]
     
     
    
 
-    
-   
-]
+      
+
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
         urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

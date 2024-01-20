@@ -20,3 +20,5 @@ from accounts import views
     
 def client_dashboard(request):
     return render(request,'client/client_dashboard.html')
+
+

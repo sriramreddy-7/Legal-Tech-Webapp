@@ -42,7 +42,6 @@ oauthlib==3.2.2
 openai==0.28.0
 packaging==23.2
 Pillow==10.0.0
-psycopg2==2.9.6
 psycopg2-binary==2.9.6
 pycparser==2.21
 pydantic==2.5.3

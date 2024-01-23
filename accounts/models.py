@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 # Create your models here.
 from django.contrib.auth.models import AbstractUser,User
 
@@ -56,12 +56,50 @@ class LSP(models.Model):
     def __str__(self):
         return str(self.user.username)
     
-    
-        
         
 class Message(models.Model):
     user_profile = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+   
+   
+# key = Fernet.generate_key()
+# cipher_suite = Fernet(key) 
+class Msg(models.Model):
+    sender=models.CharField(max_length=120)
+    receiver=models.CharField(max_length=120)
+    message=models.CharField(max_length=1000000)
+    encrypted_message = models.BinaryField(default=b'')
+    date=models.DateTimeField(default=datetime.now,blank=True)
+    file_status=models.BooleanField(default=False)
+    file_name=models.CharField(max_length=1000000,default=None,null=True)
+
+    # def save(self, *args, **kwargs):
+    #     # Encrypt the message before saving
+    #     encrypted_message = cipher_suite.encrypt(self.message.encode())
+    #     self.encrypted_message = encrypted_message
+    #     super().save(*args, **kwargs)
+
+    # def __str__(self):
+    #     # Decrypt the message when displaying it
+    #     decrypted_message = cipher_suite.decrypt(self.encrypted_message).decode()
+    #     return f"Sender: {self.sender}, Receiver: {self.receiver}, Message: {decrypted_message}, Date: {self.date}"
     
-    
+class Friend(models.Model):
+    user=models.CharField(max_length=120)
+    friend=models.CharField(max_length=120)
+    nickname=models.CharField(max_length=120)
+
+class Fileupload(models.Model):
+    file=models.FileField(upload_to='uploaded_files/')
+
+
+
+class Chat(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.TextField()
+    response = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user.username}: {self.message}'

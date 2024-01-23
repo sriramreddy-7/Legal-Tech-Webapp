@@ -217,12 +217,11 @@ def chat_friends(request):
 
 
 
-import openai
-
-openai_api_key = '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'
-openai.api_key = openai_api_key
 
 
+
+# openai_api_key = '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'
+# openai.api_key = openai_api_key
 # def ask_openai(message):
 #     # model = 'text-davinci-003'  # GPT-3.5 engine
 #     model = "gpt-3.5-turbo-instruct"  # Define model here
@@ -237,6 +236,11 @@ openai.api_key = openai_api_key
 #     answer = response.choices[0].text.strip()
 #     return answer
 
+import openai
+from django.conf import settings
+
+openai.api_key = settings.OPENAI_API_KEY
+
 def is_law_related(message):
     # Add your logic here to determine if the message is related to law
     law_keywords = ['law', 'legal', 'justice', 'court']
@@ -244,7 +248,7 @@ def is_law_related(message):
 
 def ask_openai(message):
     model = "gpt-3.5-turbo-instruct"
-
+    print(openai.api_key)
     if is_law_related(message):
         response = openai.Completion.create(
             engine=model,

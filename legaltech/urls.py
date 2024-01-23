@@ -34,6 +34,8 @@ urlpatterns = [
     path("home",views.home,name="home"), 
     path('activate/<uidb64>/<token>', views.activate, name='activate'),
     path("service",views.service,name="service"),
+    path("chatbot",views.home_chatbot,name="chatbot"),
+    
     
     path('chat_users_list',views.chat_users_list,name="chat_users_list"),
     path("room/<str:friendusername>",views.room,name='room'),
@@ -44,6 +46,7 @@ urlpatterns = [
     path("removefriend",views.removefriend,name='removefriend'),
     path("uploadfiles/<str:friend>",views.uploadfiles,name='uploadfiles'),
     path('chat_friends',views.chat_friends,name='chat_friends'),
+    
 ]
     
     

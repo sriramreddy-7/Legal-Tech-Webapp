@@ -18,8 +18,11 @@ from django.contrib.auth import logout,login
 from accounts.models import Friend,Msg,Fileupload
 from django.http import JsonResponse
 # chat/views.py
+import base64
+import openai
+from accounts.models import Chat
 
-
+from django.utils import timezone
 # from django.contrib.auth.decorators import login_required
 # from .models import Message, UserProfile
 
@@ -122,16 +125,27 @@ def send(request):
         return HttpResponse("message sent")
     return redirect('/')
 
+import json
+
+from django.core.serializers import serialize
+
+# def getmessages(request,friend):
+#     all_messages=Msg.objects.all().filter(sender=request.user).filter(receiver=friend)|Msg.objects.all().filter(sender=friend).filter(receiver=request.user)
+# #     all_messages = Msg.objects.filter(sender=request.user, receiver=friend) | Msg.objects.filter(sender=friend, receiver=request.user)
+#     serialized_messages = serialize('json', all_messages, fields=('id', 'sender', 'receiver', 'message', 'file_status', 'file_name', 'date'))
+
+#     # Convert serialized data to a Python list
+#     messages_list = json.loads(serialized_messages)
+
+#     return JsonResponse({"messages": messages_list})
+
+
 
 def getmessages(request,friend):
-    # if request.user.is_anonymous or request.user.is_active==False:
-    #     return redirect('/accounts/login')
-    # if User.objects.filter(username=friend).exists()==False:
-    #     return redirect('/')
-    # if request.user.username==friend:
-    #     return redirect('/')
     all_messages=Msg.objects.all().filter(sender=request.user).filter(receiver=friend)|Msg.objects.all().filter(sender=friend).filter(receiver=request.user)
+  
     return JsonResponse({"messages":list(all_messages.values())})
+
 
 
 def friends(request):
@@ -199,3 +213,70 @@ def uploadfiles(request, friend):
 
 def chat_friends(request):
     return render(request,'chat_friends.html')
+
+
+
+
+import openai
+
+openai_api_key = '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'
+openai.api_key = openai_api_key
+
+
+# def ask_openai(message):
+#     # model = 'text-davinci-003'  # GPT-3.5 engine
+#     model = "gpt-3.5-turbo-instruct"  # Define model here
+
+#     response = openai.Completion.create(
+#         engine=model,
+#         prompt=message,
+#         max_tokens=150,
+#         temperature=0.7,
+#     )
+
+#     answer = response.choices[0].text.strip()
+#     return answer
+
+def is_law_related(message):
+    # Add your logic here to determine if the message is related to law
+    law_keywords = ['law', 'legal', 'justice', 'court']
+    return any(keyword in message.lower() for keyword in law_keywords)
+
+def ask_openai(message):
+    model = "gpt-3.5-turbo-instruct"
+
+    if is_law_related(message):
+        response = openai.Completion.create(
+            engine=model,
+            prompt=message,
+            max_tokens=150,
+            temperature=0.7,
+        )
+        answer = response.choices[0].text.strip()
+    else:
+        answer = "I'm sorry, I can only provide information on law-related topics."
+
+    return answer
+
+def chatbot(request):
+    # chats = Chat.objects.filter(user=request.user.id)
+    chats="admin"
+    if request.method == 'POST':
+        message = request.POST.get('message')
+        response = ask_openai(message)
+        admin_user = User.objects.get(username='admin')
+        chat = Chat(user=admin_user, message=message, response=response, created_at=timezone.now())
+        chat.save()
+        return JsonResponse({'message': message, 'response': response})
+    return render(request, 'chatbot/chatbot.html', {'chats': chats})
+
+
+def home_chatbot(request):
+    if request.method == 'POST':
+        message = request.POST.get('message')
+        response = ask_openai(message)
+        admin_user = User.objects.get(username='admin')
+        chat = Chat(user=admin_user, message=message, response=response, created_at=timezone.now())
+        chat.save()
+        return JsonResponse({'message': message, 'response': response})
+    return render(request,'chatbot/home_chatbot.html')

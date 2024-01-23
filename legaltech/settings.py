@@ -217,6 +217,10 @@ EMAIL_TIMEOUT = None
 STATICFILES_STORAGE='django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 
+from decouple import config
+
+OPENAI_API_KEY = config('OPENAI_API_KEY')
+
 
 # LOGIN_REDIRECT_URL = 'home'
 
@@ -251,4 +255,6 @@ STATICFILES_STORAGE='django.contrib.staticfiles.storage.ManifestStaticFilesStora
 #         'VERSION': 'v7.0',
 #     }
 # }
+
+
 

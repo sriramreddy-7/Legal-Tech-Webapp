@@ -23,6 +23,9 @@ from django.shortcuts import get_object_or_404
 def home(request):
     return render(request,'home.html')
 
+def about(request):
+    return render(request,'about.html')
+
 def service(request):
     return render(request,'service.html')
 
@@ -44,3 +47,63 @@ def activate(request,uidb64,token):
         return render(request,'activation_failed.html')
     
 
+def affidavit(request):
+    if request.method =="POST":
+        return redirect('affdoc')
+        # return render(request,'affdoc.html')
+    return render(request,'affidavit.html')
+
+
+def affdoc(request):
+    return render(request,'affdoc.html')
+
+def notary(request):
+    if request.method =="POST":
+        purpose = request.POST.get('purpose1')
+        if purpose == "land":
+            return redirect('landnot')
+        if purpose == "house":
+            return redirect('housenot')
+        if purpose == "rental":
+            return redirect('rentalnot')
+        # return render(request,'affdoc.html')
+    return render(request,'notary.html')
+
+def landnot(request):
+    return render(request,'landnot.html')
+
+def housenot(request):
+    return render(request,'housenot.html')
+
+def rentalnot(request):
+    return render(request,'rentalnot.html')
+
+
+def notdoc(request):
+    return render(request,'notdoc.html')
+
+def agreement(request):
+    if request.method == "POST":
+        purpose = request.POST.get('purpose1')
+        if purpose == "partnership":
+            return redirect('partnership_doc')
+        if purpose == "payment":
+            return redirect('payment_doc')
+        if purpose == "lease":
+            return redirect('lease_doc')
+        # return render(request,'affdoc.html')
+    return render(request,'agreement.html')
+
+
+def partnership_doc(request):
+    return render(request,'partnership_doc.html')
+
+def payment_doc(request):
+    return render(request,'payment_doc.html')
+
+def lease_doc(request):
+    return render(request,'lease_doc.html')
+
+def help(request):
+    return render(request,'help.html')
+    

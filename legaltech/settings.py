@@ -106,19 +106,19 @@ WSGI_APPLICATION = 'legaltech.wsgi.app'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-import dj_database_url
-
 DATABASES = {
-    # 'default': dj_database_url.parse('postgresql://postgres:dC4GCC-6g3Efg3FFBGffcC6cCbG*-BCC@roundhouse.proxy.rlwy.net:21684/railway')
-    'default': dj_database_url.parse('postgres://crazycoders:MkaIZ4K82Qf4FsK8DmXcFeZ2CAIM2vaw@dpg-cm8p4p6d3nmc73b0dojg-a.oregon-postgres.render.com/pec_render_database')
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+# import dj_database_url
+
+# DATABASES = {
+#     # 'default': dj_database_url.parse('postgresql://postgres:dC4GCC-6g3Efg3FFBGffcC6cCbG*-BCC@roundhouse.proxy.rlwy.net:21684/railway')
+#     'default': dj_database_url.parse('postgres://crazycoders:MkaIZ4K82Qf4FsK8DmXcFeZ2CAIM2vaw@dpg-cm8p4p6d3nmc73b0dojg-a.oregon-postgres.render.com/pec_render_database')
+# }
 
 # DATABASES = {
 #     'default': {

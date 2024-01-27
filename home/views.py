@@ -141,10 +141,43 @@ from django.core.serializers import serialize
 
 
 
-def getmessages(request,friend):
-    all_messages=Msg.objects.all().filter(sender=request.user).filter(receiver=friend)|Msg.objects.all().filter(sender=friend).filter(receiver=request.user)
+# def getmessages(request,friend):
+#     all_messages=Msg.objects.all().filter(sender=request.user).filter(receiver=friend)|Msg.objects.all().filter(sender=friend).filter(receiver=request.user)
   
-    return JsonResponse({"messages":list(all_messages.values())})
+#     return JsonResponse({"messages":list(all_messages.values())})
+
+from django.http import JsonResponse
+from django.core.serializers import serialize
+import json
+from django.db.models import Model
+from django.core.serializers.json import DjangoJSONEncoder
+
+class MsgEncoder(DjangoJSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Model):
+            # If the object is a Django model, convert it to a dictionary
+            return obj.__dict__
+        elif isinstance(obj, memoryview):
+            # If the object is a memoryview, convert it to bytes and then to a string
+            return obj.tobytes().decode('utf-8')
+        return super().default(obj)
+
+def getmessages(request, friend):
+    all_messages = Msg.objects.all().filter(sender=request.user).filter(receiver=friend) | \
+                    Msg.objects.all().filter(sender=friend).filter(receiver=request.user)
+  
+    # Serialize using the custom encoder
+    serialized_messages = serialize('json', all_messages, cls=MsgEncoder, fields=('id', 'sender', 'receiver', 'message', 'file_status', 'file_name', 'date'))
+
+    # Convert serialized data to a Python list
+    messages_list = json.loads(serialized_messages)
+
+    # Return JsonResponse with the desired key
+    return JsonResponse({"retrieving": messages_list})
+
+
+
+
 
 
 

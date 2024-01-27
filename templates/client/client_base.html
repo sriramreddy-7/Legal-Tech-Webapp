@@ -42,7 +42,7 @@
     />
     <link
       href="{% static 'dash/vendor/quill/quill.bubble.css' %}"
-      rel="stylesheet"
+      rel="stylesheet"+
     />
     <link
       href="{% static 'dash/vendor/remixicon/remixicon.css' %}"
@@ -286,9 +286,9 @@
               </li>
 
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="">
+                <a class="dropdown-item d-flex align-items-center" href="{% url 'client:client_lsp_view' %}">
                   <i class="bi bi-person"></i>
-                  <span>My Profile</span>
+                  <span>View LSP Profile</span>
                 </a>
               </li>
               <li>

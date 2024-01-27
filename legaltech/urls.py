@@ -47,6 +47,21 @@ urlpatterns = [
     path("uploadfiles/<str:friend>",views.uploadfiles,name='uploadfiles'),
     path('chat_friends',views.chat_friends,name='chat_friends'),
     
+    ##
+    path("about",views.about,name="about"),
+    path("affidavit",views.affidavit,name="affidavit"),
+    path('affdoc',views.affdoc,name="affdoc"),
+    path("notary",views.notary,name="notary"),
+    path('notdoc',views.notdoc,name="notdoc"),
+    path('landnot',views.landnot,name="landnot"),
+    path('housenot',views.housenot,name='housenot'),
+    path('rentalnot',views.rentalnot,name='rentalnot'),
+    path("agreement",views.agreement,name="agreement"),
+    path('partnership_doc',views.partnership_doc,name="partnership_doc"),
+    path('payment_doc',views.payment_doc,name="payment_doc"),
+    path('lease_doc',views.lease_doc,name="lease_doc"),
+    path("help",views.help,name="help"),
+    
 ]
     
     

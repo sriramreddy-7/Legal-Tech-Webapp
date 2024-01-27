@@ -116,18 +116,38 @@
               <a href="{% url 'home' %}" class="nav-item nav-link active"
                 >Home</a
               >
-              <a href="" class="nav-item nav-link">About</a>
-              <a href="{% url 'service' %}" class="nav-item nav-link"
-                >Services</a
-              >
-              <a href="" class="nav-item nav-link">Testimonials</a>
-              <a href="{% url 'chatbot' %}" class="nav-item nav-link"
+              <a href="{% url 'about' %}" class="nav-item nav-link active">About</a>
+              <div class="nav-item dropdown">
+                <a
+                  href="#"
+                  class="nav-link dropdown-toggle active"
+                  data-bs-toggle="dropdown"
+                  >Services</a
+                >
+                <div
+                  class="dropdown-menu bg-light rounded-0 rounded-bottom m-0"
+                >
+                  <a href="{% url 'notary' %}" class="dropdown-item"
+                    >Notary</a>
+                  <a href="{% url 'affidavit' %}" class="dropdown-item"
+                    >Affidiavit</a
+                  >
+                  <a href="{% url 'agreement' %}" class="dropdown-item"
+                    >Agreement</a
+                  >
+                 {% comment %} <!-- <a href="{% url 'user_login' %}" class="dropdown-item"
+                    >Admin Login</a
+                  > --> {% endcomment %}
+                </div>
+              </div>
+              <a href="" class="nav-item nav-link active">Testimonials</a>
+              <a href="" class="nav-item nav-link active"
                 >Chat Bot</a
               >
               <div class="nav-item dropdown">
                 <a
                   href="#"
-                  class="nav-link dropdown-toggle"
+                  class="nav-link dropdown-toggle active"
                   data-bs-toggle="dropdown"
                   >Login</a
                 >
@@ -148,7 +168,7 @@
               <div class="nav-item dropdown">
                 <a
                   href="#"
-                  class="nav-link dropdown-toggle"
+                  class="nav-link dropdown-toggle active"
                   data-bs-toggle="dropdown"
                   >Registration</a
                 >
@@ -159,7 +179,7 @@
                   <a href="{% url 'accounts:lsp_registration' %}" class="dropdown-item">LSP Registration</a>
                 </div>
               </div>
-              <a href="" class="nav-item nav-link">Contact</a>
+              <a href="" class="nav-item nav-link active">Contact</a>
             </div>
             <div class="ms-auto d-none d-lg-block">
               <a

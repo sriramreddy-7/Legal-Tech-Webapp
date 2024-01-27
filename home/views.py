@@ -214,12 +214,6 @@ def uploadfiles(request, friend):
 def chat_friends(request):
     return render(request,'chat_friends.html')
 
-
-
-
-
-
-
 # openai_api_key = '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'
 # openai.api_key = openai_api_key
 # def ask_openai(message):
@@ -236,43 +230,45 @@ def chat_friends(request):
 #     answer = response.choices[0].text.strip()
 #     return answer
 
-import openai
-from django.conf import settings
+# import openai
+# from django.conf import settings
 
-openai.api_key = settings.OPENAI_API_KEY
+# openai.api_key = settings.OPENAI_API_KEY
 
-def is_law_related(message):
-    # Add your logic here to determine if the message is related to law
-    law_keywords = ['law', 'legal', 'justice', 'court']
-    return any(keyword in message.lower() for keyword in law_keywords)
+# def is_law_related(message):
+#     # Add your logic here to determine if the message is related to law
+#     law_keywords = ['law', 'legal', 'justice', 'court']
+#     return any(keyword in message.lower() for keyword in law_keywords)
 
-def ask_openai(message):
-    model = "gpt-3.5-turbo-instruct"
-    print(openai.api_key)
-    if is_law_related(message):
-        response = openai.Completion.create(
-            engine=model,
-            prompt=message,
-            max_tokens=150,
-            temperature=0.7,
-        )
-        answer = response.choices[0].text.strip()
-    else:
-        answer = "I'm sorry, I can only provide information on law-related topics."
+# def ask_openai(message):
+#     model = "gpt-3.5-turbo-instruct"
+#     print(openai.api_key)
+#     if is_law_related(message):
+#         response = openai.Completion.create(
+#             engine=model,
+#             prompt=message,
+#             max_tokens=150,
+#             temperature=0.7,
+#         )
+#         answer = response.choices[0].text.strip()
+#     else:
+#         answer = "I'm sorry, I can only provide information on law-related topics."
 
-    return answer
+#     return answer
 
 def chatbot(request):
     # chats = Chat.objects.filter(user=request.user.id)
-    chats="admin"
-    if request.method == 'POST':
-        message = request.POST.get('message')
-        response = ask_openai(message)
-        admin_user = User.objects.get(username='admin')
-        chat = Chat(user=admin_user, message=message, response=response, created_at=timezone.now())
-        chat.save()
-        return JsonResponse({'message': message, 'response': response})
-    return render(request, 'chatbot/chatbot.html', {'chats': chats})
+    # chats="admin"
+    # if request.method == 'POST':
+    #     message = request.POST.get('message')
+    #     response = ask_openai(message)
+    #     admin_user = User.objects.get(username='admin')
+    #     chat = Chat(user=admin_user, message=message, response=response, created_at=timezone.now())
+    #     chat.save()
+    #     return JsonResponse({'message': message, 'response': response})
+    # return render(request, 'chatbot/chatbot.html', {'chats': chats})
+    return render(request, 'chatbot/chatbot.html')
+
 
 
 def home_chatbot(request):
@@ -284,3 +280,68 @@ def home_chatbot(request):
         chat.save()
         return JsonResponse({'message': message, 'response': response})
     return render(request,'chatbot/home_chatbot.html')
+
+
+
+def affidavit(request):
+    if request.method =="POST":
+        return redirect('affdoc')
+        # return render(request,'affdoc.html')
+    return render(request,'affidavit.html')
+
+
+def affdoc(request):
+    return render(request,'affdoc.html')
+
+def notary(request):
+    if request.method =="POST":
+        purpose = request.POST.get('purpose1')
+        if purpose == "land":
+            return redirect('landnot')
+        if purpose == "house":
+            return redirect('housenot')
+        if purpose == "rental":
+            return redirect('rentalnot')
+        # return render(request,'affdoc.html')
+    return render(request,'notary.html')
+
+def landnot(request):
+    return render(request,'landnot.html')
+
+def housenot(request):
+    return render(request,'housenot.html')
+
+def rentalnot(request):
+    return render(request,'rentalnot.html')
+
+
+def notdoc(request):
+    return render(request,'notdoc.html')
+
+def agreement(request):
+    if request.method == "POST":
+        purpose = request.POST.get('purpose1')
+        if purpose == "partnership":
+            return redirect('partnership_doc')
+        if purpose == "payment":
+            return redirect('payment_doc')
+        if purpose == "lease":
+            return redirect('lease_doc')
+        # return render(request,'affdoc.html')
+    return render(request,'agreement.html')
+
+
+def partnership_doc(request):
+    return render(request,'partnership_doc.html')
+
+def payment_doc(request):
+    return render(request,'payment_doc.html')
+
+def lease_doc(request):
+    return render(request,'lease_doc.html')
+
+def help(request):
+    return render(request,'help.html')
+    
+def about(request):
+    return render(request,'about.html')

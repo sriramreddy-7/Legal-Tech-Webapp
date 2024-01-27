@@ -38,14 +38,14 @@ urlpatterns = [
     
     
     path('chat_users_list',views.chat_users_list,name="chat_users_list"),
-    path("room/<str:friendusername>",views.room,name='room'),
-    path("checkview/<str:friendusername>/",views.checkview,name='checkview'),
-    path("send",views.send,name='send'),
-    path("getmessages/<str:friend>",views.getmessages,name='getmessages'),
-    path("friends",views.friends,name='friends'),
-    path("removefriend",views.removefriend,name='removefriend'),
-    path("uploadfiles/<str:friend>",views.uploadfiles,name='uploadfiles'),
-    path('chat_friends',views.chat_friends,name='chat_friends'),
+    # path("room/<str:friendusername>",views.room,name='room'),
+    # path("checkview/<str:friendusername>/",views.checkview,name='checkview'),
+    # path("send",views.send,name='send'),
+    # path("getmessages/<str:friend>",views.getmessages,name='getmessages'),
+    # path("friends",views.friends,name='friends'),
+    # path("removefriend",views.removefriend,name='removefriend'),
+    # path("uploadfiles/<str:friend>",views.uploadfiles,name='uploadfiles'),
+    # path('chat_friends',views.chat_friends,name='chat_friends'),
     
     ##
     path("about",views.about,name="about"),

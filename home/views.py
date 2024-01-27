@@ -86,133 +86,133 @@ def chat_users_list(request):
     # return render(request, 'chatapp/chat_users_list.html',context)
 
 
-def room(request,friendusername):
-    # if request.user.is_anonymous or request.user.is_active==False:
-    #     return redirect('/accounts/login')
-    # if request.user.username == friendusername:
-    #     return redirect('/')
-    return render(request, 'chatapp/chat_ui.html',{'friend':friendusername})
+# def room(request,friendusername):
+#     # if request.user.is_anonymous or request.user.is_active==False:
+#     #     return redirect('/accounts/login')
+#     # if request.user.username == friendusername:
+#     #     return redirect('/')
+#     return render(request, 'chatapp/chat_ui.html',{'friend':friendusername})
 
 
 
-def checkview(request,friendusername):
-    # if request.user.is_anonymous or request.user.is_active==False:
-    #     return redirect('/accounts/login')
-    # if request.method == 'POST':
-    # friendusername =request.POST.get("friendusername")
-        # if request.user.username==friendusername:
-        #     return redirect('/')
-    if User.objects.filter(username=friendusername).exists():
-            return redirect('/room/'+friendusername)
-    else:
-        return redirect('/')
+# def checkview(request,friendusername):
+#     # if request.user.is_anonymous or request.user.is_active==False:
+#     #     return redirect('/accounts/login')
+#     # if request.method == 'POST':
+#     # friendusername =request.POST.get("friendusername")
+#         # if request.user.username==friendusername:
+#         #     return redirect('/')
+#     if User.objects.filter(username=friendusername).exists():
+#             return redirect('/room/'+friendusername)
+#     else:
+#         return redirect('/')
 
 
-def send(request):
-    # if request.user.is_anonymous or request.user.is_active==False:
-    #     return redirect('/accounts/login')
-    if request.method == 'POST':
-        sender=request.POST.get("username")
-        receiver=request.POST.get("friend")
-        message=request.POST.get("message")
-        message=message.strip()
-        if (message == "") or (request.user.username != sender):
-            return redirect('/room/'+receiver)
-        if sender==receiver:
-            return redirect('/')
-        newmessage=Msg(sender=sender,receiver=receiver,message=message)
-        newmessage.save()
-        return HttpResponse("message sent")
-    return redirect('/')
+# def send(request):
+#     # if request.user.is_anonymous or request.user.is_active==False:
+#     #     return redirect('/accounts/login')
+#     if request.method == 'POST':
+#         sender=request.POST.get("username")
+#         receiver=request.POST.get("friend")
+#         message=request.POST.get("message")
+#         message=message.strip()
+#         if (message == "") or (request.user.username != sender):
+#             return redirect('/room/'+receiver)
+#         if sender==receiver:
+#             return redirect('/')
+#         newmessage=Msg(sender=sender,receiver=receiver,message=message)
+#         newmessage.save()
+#         return HttpResponse("message sent")
+#     return redirect('/')
 
-import json
+# import json
 
-from django.core.serializers import serialize
+# from django.core.serializers import serialize
+
+# # def getmessages(request,friend):
+# #     all_messages=Msg.objects.all().filter(sender=request.user).filter(receiver=friend)|Msg.objects.all().filter(sender=friend).filter(receiver=request.user)
+# # #     all_messages = Msg.objects.filter(sender=request.user, receiver=friend) | Msg.objects.filter(sender=friend, receiver=request.user)
+# #     serialized_messages = serialize('json', all_messages, fields=('id', 'sender', 'receiver', 'message', 'file_status', 'file_name', 'date'))
+
+# #     # Convert serialized data to a Python list
+# #     messages_list = json.loads(serialized_messages)
+
+# #     return JsonResponse({"messages": messages_list})
+
+
 
 # def getmessages(request,friend):
 #     all_messages=Msg.objects.all().filter(sender=request.user).filter(receiver=friend)|Msg.objects.all().filter(sender=friend).filter(receiver=request.user)
-# #     all_messages = Msg.objects.filter(sender=request.user, receiver=friend) | Msg.objects.filter(sender=friend, receiver=request.user)
-#     serialized_messages = serialize('json', all_messages, fields=('id', 'sender', 'receiver', 'message', 'file_status', 'file_name', 'date'))
-
-#     # Convert serialized data to a Python list
-#     messages_list = json.loads(serialized_messages)
-
-#     return JsonResponse({"messages": messages_list})
-
-
-
-def getmessages(request,friend):
-    all_messages=Msg.objects.all().filter(sender=request.user).filter(receiver=friend)|Msg.objects.all().filter(sender=friend).filter(receiver=request.user)
   
-    return JsonResponse({"messages":list(all_messages.values())})
+#     return JsonResponse({"messages":list(all_messages.values())})
 
 
 
-def friends(request):
-    # if request.user.is_anonymous or request.user.is_active==False:
-    #     return redirect('/accounts/login')
-    if request.method=='POST':
-        friend=request.POST.get('friendusername')
-        nickname=request.POST.get('friendnickname')
-        user=request.user.username
-        if friend==user:
-            return redirect('/friends')
-        if friend=="" or nickname=="":
-            return redirect('/friends')
-        if Friend.objects.filter(friend=friend).filter(user=user).exists():
-            return redirect('/friends')
-        if User.objects.filter(username=friend).exists()==False:
-            return redirect('/friends')
-        new_friend=Friend.objects.create(user=user, nickname=nickname,friend=friend)
-        new_friend.save()
+# def friends(request):
+#     # if request.user.is_anonymous or request.user.is_active==False:
+#     #     return redirect('/accounts/login')
+#     if request.method=='POST':
+#         friend=request.POST.get('friendusername')
+#         nickname=request.POST.get('friendnickname')
+#         user=request.user.username
+#         if friend==user:
+#             return redirect('/friends')
+#         if friend=="" or nickname=="":
+#             return redirect('/friends')
+#         if Friend.objects.filter(friend=friend).filter(user=user).exists():
+#             return redirect('/friends')
+#         if User.objects.filter(username=friend).exists()==False:
+#             return redirect('/friends')
+#         new_friend=Friend.objects.create(user=user, nickname=nickname,friend=friend)
+#         new_friend.save()
     
-    unsorted_friends=Friend.objects.all().filter(user=request.user.username)
-    user_friends=sorted(list(unsorted_friends.values()),key=lambda k:k['nickname'].lower())
-    return render(request,'chat_friends_list.html',{"user_friends": user_friends})
+#     unsorted_friends=Friend.objects.all().filter(user=request.user.username)
+#     user_friends=sorted(list(unsorted_friends.values()),key=lambda k:k['nickname'].lower())
+#     return render(request,'chat_friends_list.html',{"user_friends": user_friends})
 
 
 
-def removefriend(request):
-    # if request.user.is_anonymous or request.user.is_active==False:
-    #     return redirect('/accounts/login')
+# def removefriend(request):
+#     # if request.user.is_anonymous or request.user.is_active==False:
+#     #     return redirect('/accounts/login')
     
-    if request.method =='POST':
-        friend=request.POST.get('friendusername')
-        user=request.user.username
-        if Friend.objects.all().filter(friend=friend).filter(user=user).exists()==False:
-            return redirect('/friends')
+#     if request.method =='POST':
+#         friend=request.POST.get('friendusername')
+#         user=request.user.username
+#         if Friend.objects.all().filter(friend=friend).filter(user=user).exists()==False:
+#             return redirect('/friends')
 
-        remove_friend=Friend.objects.all().filter(friend=friend).filter(user=user)
-        remove_friend[0].delete()
-        return redirect('/friends')
+#         remove_friend=Friend.objects.all().filter(friend=friend).filter(user=user)
+#         remove_friend[0].delete()
+#         return redirect('/friends')
 
-    return redirect('/friends')
-
-
-
-def uploadfiles(request, friend):
-    # if request.user.is_anonymous or request.user.is_active==False:
-    #     return redirect('/accounts/login')
-
-    if(request.method=='POST'):
-        sender= request.user.username
-        receiver=friend
-        if ('file' in request.FILES)==False:
-            return redirect('/room/'+friend)
-        file=request.FILES.get('file')
-        new_file=Fileupload(file=file)
-        new_file.save()
-
-        file_name=new_file.file.name
-        #file_name=file_name[15:len(file_name):1]
-
-        new_message=Msg(sender=sender,receiver=receiver,message=new_file.file.url,file_status=True,file_name=file_name)
-        new_message.save()
-    return HttpResponse('File uploaded successfully!')
+#     return redirect('/friends')
 
 
-def chat_friends(request):
-    return render(request,'chat_friends.html')
+
+# def uploadfiles(request, friend):
+#     # if request.user.is_anonymous or request.user.is_active==False:
+#     #     return redirect('/accounts/login')
+
+#     if(request.method=='POST'):
+#         sender= request.user.username
+#         receiver=friend
+#         if ('file' in request.FILES)==False:
+#             return redirect('/room/'+friend)
+#         file=request.FILES.get('file')
+#         new_file=Fileupload(file=file)
+#         new_file.save()
+
+#         file_name=new_file.file.name
+#         #file_name=file_name[15:len(file_name):1]
+
+#         new_message=Msg(sender=sender,receiver=receiver,message=new_file.file.url,file_status=True,file_name=file_name)
+#         new_message.save()
+#     return HttpResponse('File uploaded successfully!')
+
+
+# def chat_friends(request):
+#     return render(request,'chat_friends.html')
 
 # openai_api_key = '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'
 # openai.api_key = openai_api_key
@@ -230,44 +230,52 @@ def chat_friends(request):
 #     answer = response.choices[0].text.strip()
 #     return answer
 
-# import openai
-# from django.conf import settings
+import openai
+from django.conf import settings
 
-# openai.api_key = settings.OPENAI_API_KEY
+openai.api_key = settings.OPENAI_API_KEY
 
-# def is_law_related(message):
-#     # Add your logic here to determine if the message is related to law
-#     law_keywords = ['law', 'legal', 'justice', 'court']
-#     return any(keyword in message.lower() for keyword in law_keywords)
+def is_law_related(message):
+    # Add your logic here to determine if the message is related to law
+    law_keywords = ['law', 'legal', 'justice', 'court']
+    return any(keyword in message.lower() for keyword in law_keywords)
 
-# def ask_openai(message):
-#     model = "gpt-3.5-turbo-instruct"
-#     print(openai.api_key)
-#     if is_law_related(message):
-#         response = openai.Completion.create(
-#             engine=model,
-#             prompt=message,
-#             max_tokens=150,
-#             temperature=0.7,
-#         )
-#         answer = response.choices[0].text.strip()
-#     else:
-#         answer = "I'm sorry, I can only provide information on law-related topics."
+def ask_openai(message):
+    model = "gpt-3.5-turbo-instruct"
+    # print(openai.api_key)
+    # if is_law_related(message):
+    #     response = openai.Completion.create(
+    #         engine=model,
+    #         prompt=message,
+    #         max_tokens=150,
+    #         temperature=0.7,
+    #     )
+    #     answer = response.choices[0].text.strip()
+    # else:
+    #     answer = "I'm sorry, I can only provide information on law-related Topics."
+        
+    response = openai.Completion.create(
+            engine=model,
+            prompt=message,
+            max_tokens=150,
+            temperature=0.7,
+        )
+    answer = response.choices[0].text.strip()
 
-#     return answer
+    return answer
 
 def chatbot(request):
-    # chats = Chat.objects.filter(user=request.user.id)
-    # chats="admin"
-    # if request.method == 'POST':
-    #     message = request.POST.get('message')
-    #     response = ask_openai(message)
-    #     admin_user = User.objects.get(username='admin')
-    #     chat = Chat(user=admin_user, message=message, response=response, created_at=timezone.now())
-    #     chat.save()
-    #     return JsonResponse({'message': message, 'response': response})
-    # return render(request, 'chatbot/chatbot.html', {'chats': chats})
-    return render(request, 'chatbot/chatbot.html')
+    chats = Chat.objects.filter(user=request.user.id)
+    chats="admin"
+    if request.method == 'POST':
+        message = request.POST.get('message')
+        response = ask_openai(message)
+        admin_user = User.objects.get(username='admin')
+        chat = Chat(user=admin_user, message=message, response=response, created_at=timezone.now())
+        chat.save()
+        return JsonResponse({'message': message, 'response': response})
+    return render(request, 'chatbot/chatbot.html', {'chats': chats})
+    # return render(request, 'chatbot/chatbot.html')
 
 
 
@@ -345,6 +353,3 @@ def help(request):
     
 def about(request):
     return render(request,'about.html')
-
-
-

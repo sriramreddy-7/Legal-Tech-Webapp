@@ -123,6 +123,8 @@ DATABASES = {
     # },
     
     'default': dj_database_url.parse('postgres://crazycoders:MkaIZ4K82Qf4FsK8DmXcFeZ2CAIM2vaw@dpg-cm8p4p6d3nmc73b0dojg-a.oregon-postgres.render.com/pec_render_database')
+    # 'default': dj_database_url.parse('postgres://crazycoders:MkaIZ4K82Qf4FsK8DmXcFeZ2CAIM2vaw@dpg-cm8p4p6d3nmc73b0dojg-a.oregon-postgres.render.com/pec_render_database')
+    
 }
 
 # DATABASES = {

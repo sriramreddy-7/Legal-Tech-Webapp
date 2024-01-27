@@ -13,13 +13,19 @@ from accounts.tokens import generate_token
 from accounts.models import Profile,LSP
 from django.shortcuts import get_object_or_404
 from accounts import views
+<<<<<<< HEAD
 from accounts import models
+=======
+from accounts.models import LSP
+
+>>>>>>> a9d6ef9258dca79e93d230bedb7f10d419e5cc03
 
 
     
 def client_dashboard(request):
     return render(request,'client/client_dashboard.html')
 
+<<<<<<< HEAD
 def client_lsp_view(request):
     lsp_users = LSP.objects.filter(lsp_type='Lawyer')
     # profiles = Profile.objects.filter(user__in=lsp_users.values('user'))
@@ -78,3 +84,8 @@ def lsp_profile_view(request,username):
     print("e4")
     
     return render(request, 'client/lsp_profile_view.html', context)
+=======
+def lsp_view(request):
+    lsp=LSP.objects.all()
+    return render(request,"client/lsp_view.html",{'lsp':lsp})
+>>>>>>> a9d6ef9258dca79e93d230bedb7f10d419e5cc03

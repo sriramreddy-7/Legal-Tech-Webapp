@@ -103,3 +103,14 @@ class Chat(models.Model):
 
     def __str__(self):
         return f'{self.user.username}: {self.message}'
+    
+    
+class Doubts(models.Model):
+    first_name = models.CharField(max_length=100, null=False)
+    last_name = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(null=False)
+    type_of_doubt = models.CharField(max_length=100, null=False)
+    message = models.TextField(null=False)
+
+    def _str_(self):
+        return f"{self.first_name} {self.last_name}"

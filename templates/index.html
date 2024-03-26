@@ -116,7 +116,7 @@
               <a href="{% url 'home' %}" class="nav-item nav-link active"
                 >Home</a
               >
-              <a href="{% url 'about' %}" class="nav-item nav-link active">About</a>
+             
               <div class="nav-item dropdown">
                 <a
                   href="#"
@@ -141,7 +141,7 @@
                 </div>
               </div>
               <a href="" class="nav-item nav-link active">Testimonials</a>
-              <a href="" class="nav-item nav-link active"
+              <a href="{% url 'chatbot' %}" class="nav-item nav-link active"
                 >Chat Bot</a
               >
               <div class="nav-item dropdown">
@@ -175,19 +175,13 @@
                 <div
                   class="dropdown-menu bg-light rounded-0 rounded-bottom m-0"
                 >
-                  <a href="{% url 'accounts:client_registration' %}" class="dropdown-item">Client / User Registration</a>
+                  <a href="{% url 'accounts:client_registration' %}" class="dropdown-item">Client | User Registration</a>
                   <a href="{% url 'accounts:lsp_registration' %}" class="dropdown-item">LSP Registration</a>
                 </div>
               </div>
-              <a href="" class="nav-item nav-link active">Contact</a>
+           
             </div>
-            <div class="ms-auto d-none d-lg-block">
-              <a
-                href="{% url 'admin_app:admin_dashboard' %}"
-                class="btn btn-primary rounded-pill py-2 px-3"
-                >Admin Base</a
-              >
-            </div>
+            
           </div>
         </nav>
       </div>

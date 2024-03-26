@@ -19,7 +19,18 @@ from django.http import JsonResponse
 
 def lsp_dashboard(request):
     chat_user=User.objects.all()
-    context={
+    user = get_object_or_404(User, username=request.user.username)
+    print("e1")
+    # Fetch the user profile based on the 'user' field in the Profile model
+    user_profile = get_object_or_404(Profile, user=user)
+    print("e1")
+    # Fetch the LSP details based on the 'user' field in the LSP model
+    lsp_user = get_object_or_404(LSP, user=user)
+    print("e1")
+    context = {
+        'user': user,
+        'user_profile': user_profile,
+        'lsp_user': lsp_user,
         'chat_user':chat_user,
     }
     return render(request,'lsp/lsp_dashboard.html',context)

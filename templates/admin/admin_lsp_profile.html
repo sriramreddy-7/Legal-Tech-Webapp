@@ -1,6 +1,4 @@
-{% extends 'admin/admin_base.html' %} 
-{% load static %}
-{% block body %}
+{% extends 'admin/admin_base.html' %} {% load static %} {% block body %}
 <main id="main" class="main">
   <div class="pagetitle">
     <h1>Profile</h1>
@@ -85,7 +83,6 @@
                 class="tab-pane fade show active profile-overview"
                 id="profile-overview"
               >
-                <h5 class="card-title">About</h5>
                 <p class="small fst-italic">{{ user_profile.bio}}</p>
 
                 <h5 class="card-title">Profile Details</h5>
@@ -238,12 +235,16 @@
                   </div>
                 </div>
                 <form
-                 
                   action="{% url 'admin_app:verify_profile' user.username %}"
-                   method="post"
+                  method="post"
                 >
                   {% csrf_token %}
-                  <input type="text" placeholder="Enter the Welcome Message" class="form-control" name="msg">
+                  <input
+                    type="text"
+                    placeholder="Enter the Welcome Message"
+                    class="form-control"
+                    name="msg"
+                  />
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary">
                       Approve

@@ -103,3 +103,24 @@ class Chat(models.Model):
 
     def __str__(self):
         return f'{self.user.username}: {self.message}'
+    
+    
+class Doubts(models.Model):
+    first_name = models.CharField(max_length=100, null=False)
+    last_name = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(null=False)
+    type_of_doubt = models.CharField(max_length=100, null=False)
+    message = models.TextField(null=False)
+
+    def _str_(self):
+        return f"{self.first_name} {self.last_name}"
+    
+    
+class Connection(models.Model):
+    lsp_username = models.CharField(max_length=100)
+    client_username = models.CharField(max_length=100)
+    message_type = models.CharField(max_length=50)
+    case_description = models.TextField()  
+
+    def __str__(self):
+        return f"{self.lsp_username} - {self.client_username}"

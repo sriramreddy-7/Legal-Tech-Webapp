@@ -228,21 +228,15 @@
                     <img src="{{ lsp_user.signature.url }}" alt="Signature" />
                   </div>
                 </div>
-                <form
-                 
-                  action="{% url 'admin_app:verify_profile' user.username %}"
-                   method="post"
-                >
-                  {% csrf_token %}
+                
                   <input type="text" placeholder="Enter the Welcome Message" class="form-control" name="msg" value="pass" hidden>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary">
-                      Approve
-                    </button>
-                    &nbsp;
-                    <button type="reset" class="btn btn-danger">Reject</button>
+                    <a type="button" herf="{% url 'client:client_lsp_consult' %}" class="btn btn-primary">
+                      Consult
+                    </a>
+                   
                   </div>
-                </form>
+                
 
                 <!-- <div class="text-center">
                     <button type="submit" class="btn btn-danger">

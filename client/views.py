@@ -108,3 +108,7 @@ def client_contact(request):
         return render(request,'client/client_contact.html')
     
     return render(request,'client/client_contact.html')
+
+
+def client_lsp_consult(request):
+    return render(request,'client/client_lsp_consult.html')

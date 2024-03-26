@@ -18,8 +18,8 @@ from django.contrib.auth import logout,login
 from accounts.models import Friend,Msg,Fileupload
 from django.http import JsonResponse
 # chat/views.py
-import base64
-import openai
+# import base64
+# import openai
 from accounts.models import Chat
 
 from django.utils import timezone
@@ -140,7 +140,6 @@ def chat_users_list(request):
 # #     return JsonResponse({"messages": messages_list})
 
 
-
 # def getmessages(request,friend):
 #     all_messages=Msg.objects.all().filter(sender=request.user).filter(receiver=friend)|Msg.objects.all().filter(sender=friend).filter(receiver=request.user)
   
@@ -189,7 +188,6 @@ def chat_users_list(request):
 #     return redirect('/friends')
 
 
-
 # def uploadfiles(request, friend):
 #     # if request.user.is_anonymous or request.user.is_active==False:
 #     #     return redirect('/accounts/login')
@@ -230,50 +228,85 @@ def chat_users_list(request):
 #     answer = response.choices[0].text.strip()
 #     return answer
 
-import openai
-from django.conf import settings
+# import openai
+# from django.conf import settings
 
-openai.api_key = settings.OPENAI_API_KEY
+# # openai.api_key = settings.OPENAI_API_KEY
+# # openai.api_key='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'
+# openai.api_key='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'
+# 4 KEY
+# openai.api_key='asst_WiasYcXVMbtI1NtPUfzzyVEq'
 
-def is_law_related(message):
-    # Add your logic here to determine if the message is related to law
-    law_keywords = ['law', 'legal', 'justice', 'court']
-    return any(keyword in message.lower() for keyword in law_keywords)
 
-def ask_openai(message):
-    model = "gpt-3.5-turbo-instruct"
-    # print(openai.api_key)
-    # if is_law_related(message):
-    #     response = openai.Completion.create(
+# def is_law_related(message):
+#     # Add your logic here to determine if the message is related to law
+#     law_keywords = ['law', 'legal', 'justice', 'court',
+                    
+#     ]
+#     return any(keyword in message.lower() for keyword in law_keywords)
+# import openai
+
+# def ask_openai(message):
+#     model = "gpt-3.5-turbo-instruct"
+    
+#     # Check if the message is law-related
+#     if is_law_related(message):
+#         # Add instructions for law-based questions without using keywords
+#         instructions = "Provide detailed and accurate information on the legal aspects of the following:"
+        
+#         # Concatenate the instructions with the user's message
+#         prompt = f"{instructions}\n\n{message}"
+        
+#         # Generate a response from the model
+#         response = openai.Completion.create(
+#             engine=model,
+#             prompt=prompt,
+#             max_tokens=150,
+#             temperature=0.7,
+#         )
+        
+#         # Extract and return the generated answer
+#         answer = response.choices[0].text.strip()
+#     else:
+#         answer = "I'm sorry, I can only provide information on law-related topics."
+        
+#     return answer
+
+
+# def ask_openai(message):
+#     model = "gpt-3.5-turbo-instruct"
+#     # print(openai.api_key)
+#     # if is_law_related(message):
+#     response = openai.Completion.create(
+#             engine=model,
+#             prompt=message,
+#             max_tokens=150,
+#             temperature=0.7,
+#         )
+#     answer = response.choices[0].text.strip()
+    # else:
+    #     answer = "I'm sorry, I can only provide information on law-related Topics."
+        
+    # response = openai.Completion.create(
     #         engine=model,
     #         prompt=message,
     #         max_tokens=150,
     #         temperature=0.7,
     #     )
-    #     answer = response.choices[0].text.strip()
-    # else:
-    #     answer = "I'm sorry, I can only provide information on law-related Topics."
-        
-    response = openai.Completion.create(
-            engine=model,
-            prompt=message,
-            max_tokens=150,
-            temperature=0.7,
-        )
-    answer = response.choices[0].text.strip()
+    # answer = response.choices[0].text.strip()
 
     return answer
 
 def chatbot(request):
     chats = Chat.objects.filter(user=request.user.id)
     chats="admin"
-    if request.method == 'POST':
-        message = request.POST.get('message')
-        response = ask_openai(message)
-        admin_user = User.objects.get(username='admin')
-        chat = Chat(user=admin_user, message=message, response=response, created_at=timezone.now())
-        chat.save()
-        return JsonResponse({'message': message, 'response': response})
+    # if request.method == 'POST':
+    #     message = request.POST.get('message')
+    #     response = ask_openai(message)
+    #     admin_user = User.objects.get(username='admin')
+    #     chat = Chat(user=admin_user, message=message, response=response, created_at=timezone.now())
+    #     chat.save()
+    #     return JsonResponse({'message': message, 'response': response})
     return render(request, 'chatbot/chatbot.html', {'chats': chats})
     # return render(request, 'chatbot/chatbot.html')
 

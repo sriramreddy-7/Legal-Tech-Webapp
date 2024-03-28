@@ -187,8 +187,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Also Make aure To set allowed_hosts to '*'
 
 # CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR, 'static')
 ]

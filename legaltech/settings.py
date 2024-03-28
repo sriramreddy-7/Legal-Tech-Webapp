@@ -113,31 +113,25 @@ WSGI_APPLICATION = 'legaltech.wsgi.app'
 #     }
 # }
 
-# import dj_database_url
+import dj_database_url
 
 DATABASES = {
     # 'default': dj_database_url.parse('postgresql://postgres:dC4GCC-6g3Efg3FFBGffcC6cCbG*-BCC@roundhouse.proxy.rlwy.net:21684/railway')
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Use your local database engine
-        'NAME': BASE_DIR / "db.sqlite3",  # Adjust the path as needed
-    },
-    
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',  # Use your local database engine
+    #     'NAME': BASE_DIR / "db.sqlite3",  # Adjust the path as needed
+    # },
+     'default': dj_database_url.parse('postgres://crazycoders:MkaIZ4K82Qf4FsK8DmXcFeZ2CAIM2vaw@dpg-cm8p4p6d3nmc73b0dojg-a.oregon-postgres.render.com/pec_render_database'),
     # 'default': dj_database_url.parse('postgres://crazycoders:MkaIZ4K82Qf4FsK8DmXcFeZ2CAIM2vaw@dpg-cm8p4p6d3nmc73b0dojg-a.oregon-postgres.render.com/pec_render_database')
     # 'default': dj_database_url.parse('postgres://crazycoders:MkaIZ4K82Qf4FsK8DmXcFeZ2CAIM2vaw@dpg-cm8p4p6d3nmc73b0dojg-a.oregon-postgres.render.com/pec_render_database')
     
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',  # Use djongo connector for MongoDB
-#         'NAME': 'mongodb',
-#         'CLIENT': {
-#             'host': 'roundhouse.proxy.rlwy.net',
-#             'username': 'mongo',
-#             'password': 'eFGfG-A-3aGDbgbAfDf-bGcHH1hGe4E4',
-#             'authMechanism': 'SCRAM-SHA-1',  # Authentication mechanism required by Railway
-#         }
-#     }
+
+
+
+# DATABASES={
+#     "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
 # }
 
 

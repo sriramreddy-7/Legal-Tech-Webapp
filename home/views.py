@@ -16,6 +16,11 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import logout,login
 from accounts.models import Friend,Msg,Fileupload
 from django.http import JsonResponse
+<<<<<<< HEAD
+=======
+# chat/views.py
+# import base64
+>>>>>>> 5e641178c104d0d7f1bdf187725efee6cfa180f1
 from accounts.models import Chat
 
 from django.utils import timezone
@@ -72,7 +77,11 @@ def chat_users_list(request):
         return render(request, 'chatapp/chat_users_list.html',context)
     else:
         return HttpResponse("Data Base Error")
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 5e641178c104d0d7f1bdf187725efee6cfa180f1
 
 def chatbot(request):
     chats = Chat.objects.filter(user=request.user.id)
